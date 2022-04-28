@@ -13,5 +13,9 @@ class RecordSelect : AppCompatActivity() {
         btn_farmwork.setOnClickListener{
             startActivity(Intent(this, FarmWork::class.java))       //切換頁面
         }
+
+        btn_other.setOnClickListener{
+            startActivity(Intent(this, OtherWork::class.java))       //切換頁面
+        }
     }
 }
