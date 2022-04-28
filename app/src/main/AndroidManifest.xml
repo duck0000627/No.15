@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.No15">
         <activity
+            android:name=".OtherWork"
+            android:exported="false" />
+        <activity
             android:name=".RecordSelect"
             android:exported="false" />
         <activity
