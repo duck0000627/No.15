@@ -11,18 +11,23 @@
         android:theme="@style/Theme.No15">
         <activity
             android:name=".OtherWork"
+            android:label="其他工作"
             android:exported="false" />
         <activity
             android:name=".RecordSelect"
+            android:label="工作選擇"
             android:exported="false" />
         <activity
             android:name=".SelectAction"
+            android:label="請選擇要執行的動作"
             android:exported="false" />
         <activity
             android:name=".FarmWork"
+            android:label="農場工作"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:label="身分選擇"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
