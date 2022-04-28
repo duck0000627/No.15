@@ -11,7 +11,7 @@ class SelectAction : AppCompatActivity() {
         setContentView(R.layout.activity_select_action)
 
         btn_record.setOnClickListener{
-            startActivity(Intent(this, RecordSelect::class.java))
+            startActivity(Intent(this, RecordSelect::class.java))      //切換頁面
         }
     }
 }

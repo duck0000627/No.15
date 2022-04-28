@@ -11,11 +11,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btn_boss.setOnClickListener{
-            startActivity(Intent(this, SelectAction::class.java))
+            startActivity(Intent(this, SelectAction::class.java))      //切換頁面
         }
 
         btn_employee.setOnClickListener{
-            startActivity(Intent(this, SelectAction::class.java))
+            startActivity(Intent(this, SelectAction::class.java))      //切換頁面
         }
     }
 }
