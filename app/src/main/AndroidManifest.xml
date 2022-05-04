@@ -15,8 +15,9 @@
             android:exported="false" />
         <activity
             android:name=".DataPage"
-            android:label="請選擇要執行的動作"
-            android:exported="false" />
+            android:label="所有紀錄"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>    //刪掉toolbar
         <activity
             android:name=".FarmWork"
             android:label="農場工作"
