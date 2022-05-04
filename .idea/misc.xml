@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/No15/app/src/main/res/layout/activity_data_page.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_farmwork.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
@@ -10,6 +11,7 @@
         <entry key="..\:/No15/app/src/main/res/layout/activity_record_select.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_select_action.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/login_alert.xml" value="0.25364583333333335" />
+        <entry key="..\:/No15/app/src/main/res/menu/navigation_drawer.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>
