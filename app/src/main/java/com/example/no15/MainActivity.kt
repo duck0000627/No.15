@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "請輸入密碼", Toast.LENGTH_SHORT).show()
                 }else{
                     if (password == "123456")     //密碼
-                        startActivity(Intent(this, SelectAction::class.java))      //切換頁面
+                        startActivity(Intent(this, DataPage::class.java))      //切換頁面
                     else{
                         Toast.makeText(this,"密碼錯誤", Toast.LENGTH_SHORT).show()
                     }
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "請輸入密碼", Toast.LENGTH_SHORT).show()
                 }else{
                     if (password == "888888")      //密碼
-                        startActivity(Intent(this, SelectAction::class.java))      //切換頁面
+                        startActivity(Intent(this, DataPage::class.java))      //切換頁面
                     else{
                         Toast.makeText(this,"密碼錯誤", Toast.LENGTH_SHORT).show()
                     }
