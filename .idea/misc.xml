@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/No15/app/src/main/res/layout/activity_data_page.xml" value="0.21603260869565216" />
+        <entry key="..\:/No15/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.157" />
+        <entry key="..\:/No15/app/src/main/res/layout/activity_boss_login.xml" value="0.25364583333333335" />
+        <entry key="..\:/No15/app/src/main/res/layout/activity_data_page.xml" value="0.25364583333333335" />
+        <entry key="..\:/No15/app/src/main/res/layout/activity_employee_login.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_farmwork.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
-        <entry key="..\:/No15/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/No15/app/src/main/res/layout/activity_main.xml" value="0.2427536231884058" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_other_work.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_record_select.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_select_action.xml" value="0.25364583333333335" />
@@ -25,5 +28,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.25364583333333335" />
+      </ProjectState>
+    </option>
   </component>
 </project>

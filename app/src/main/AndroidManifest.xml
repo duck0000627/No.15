@@ -9,24 +9,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.No15">
         <activity
+            android:name=".Employee_login"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />/>
+        <activity
+            android:name=".Boss_login"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />/>
+        <activity
             android:name=".OtherWork"
-            android:label="其他工作"
-            android:exported="false" />
+            android:exported="false"
+            android:label="其他工作" />
         <activity
             android:name=".DataPage"
-            android:label="所有紀錄"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>    //刪掉toolbar
+            android:label="所有紀錄"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".FarmWork"
-            android:label="農場工作"
-            android:exported="false" />
+            android:exported="false"
+            android:label="農場工作" />
         <activity
             android:name=".MainActivity"
-            android:label="身分選擇"
             android:exported="true"
+            android:label="身分選擇"
             android:theme="@style/Theme.Design.Light.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

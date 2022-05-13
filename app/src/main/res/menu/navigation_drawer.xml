@@ -2,14 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/drawer_farmwork"
-        android:title="農場工作"/>
+        android:title="農場工作紀錄"/>
     <item
         android:id="@+id/drawer_muck"
-        android:title="肥料"/>
+        android:title="肥料資材使用事項"/>
     <item
         android:id="@+id/drawer_worm"
-        android:title="病蟲害"/>
+        android:title="防治資材使用紀錄"/>
     <item
         android:id="@+id/drawer_other"
-        android:title="其他"/>
+        android:title="其他記事"/>
+    <item
+        android:id="@+id/drawer_other"
+        android:title="匯出"/>
+    <item
+        android:id="@+id/drawer_other"
+        android:title="登出"/>
 </menu>
