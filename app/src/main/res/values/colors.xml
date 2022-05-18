@@ -11,4 +11,6 @@
     <color name="greeen">#008000</color>
     <color name="fluorescent_green">#5DEF60</color>
     <color name="light_green">#00b800</color>
+    <color name="toolbar">#6eaa5e</color>
+    <color name="background">#dbead5</color>
 </resources>
