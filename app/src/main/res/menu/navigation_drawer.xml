@@ -13,9 +13,9 @@
         android:id="@+id/drawer_other"
         android:title="其他記事"/>
     <item
-        android:id="@+id/drawer_other"
+        android:id="@+id/drawer_print"
         android:title="匯出"/>
     <item
-        android:id="@+id/drawer_other"
+        android:id="@+id/drawer_logout"
         android:title="登出"/>
 </menu>
