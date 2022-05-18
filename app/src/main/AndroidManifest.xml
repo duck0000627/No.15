@@ -28,7 +28,8 @@
         <activity
             android:name=".FarmWork"
             android:exported="false"
-            android:label="農場工作" />
+            android:label="農場工作"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
