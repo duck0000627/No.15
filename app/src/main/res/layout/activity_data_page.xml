@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataPage">
+    tools:context=".DataPage"
+    android:background="@color/background">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_record"
@@ -26,7 +27,7 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         android:minHeight="?attr/actionBarSize"
-        android:backgroundTint="@color/light_green"
+        android:backgroundTint="@color/toolbar"
         app:navigationIcon="@drawable/ic_baseline_dehaze_24"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"/>
