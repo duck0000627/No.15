@@ -18,4 +18,8 @@
         <item>5</item>
         <item>6</item>
     </string-array>
+    <string-array name="use_number">
+        <item>包</item>
+        <item>公斤</item>
+    </string-array>
 </resources>
