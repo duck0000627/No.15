@@ -9,13 +9,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.No15">
         <activity
+            android:name=".WormWork"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".MuckWork"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
             android:name=".Employee_login"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />/>
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".Boss_login"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />/>
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".OtherWork"
             android:exported="false"
