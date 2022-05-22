@@ -32,25 +32,40 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"/>
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/nodata_background" />
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/layout_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:openDrawer="left">
+        tools:openDrawer="left"
+        tools:visibility="invisible">
+
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_fragement"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/main_fragement"/>
+            android:layout_height="match_parent" />
+
         <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_drawer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start|left"
-            android:id="@+id/navigation_drawer"
             android:elevation="5dp"
-            app:menu="@menu/navigation_drawer"
-            android:fitsSystemWindows="true"/>
+            android:fitsSystemWindows="true"
+            app:menu="@menu/navigation_drawer" >
+
+        </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 
 
