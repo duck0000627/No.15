@@ -42,6 +42,9 @@ class DataPage : AppCompatActivity() {
                     replaceFragement(Other_Data_Fragment())
                     layout_drawer.closeDrawer(navigation_drawer)
                 }
+                R.id.drawer_logout -> {      //登出
+                    startActivity(Intent(this,MainActivity::class.java))
+                }
                 else -> {}
             }
             return@setNavigationItemSelectedListener true
