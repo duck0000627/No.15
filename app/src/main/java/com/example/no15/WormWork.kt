@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work.*
+import kotlinx.android.synthetic.main.activity_muck_work.*
 import kotlinx.android.synthetic.main.activity_worm_work.*
 
 class WormWork : AppCompatActivity() {
@@ -28,6 +29,15 @@ class WormWork : AppCompatActivity() {
                 .setPositiveButton("捨棄") {dialog,which ->
                     startActivity(Intent(this, FarmWork::class.java)) //案箭頭回上一頁
                 }.show()
+        }
+
+        toolbar_Wormwork.setOnMenuItemClickListener{
+            when(it.itemId){
+                R.id.toolbar_success -> {         //當打勾按下去
+                    startActivity(Intent(this,FarmWork::class.java))       //回到上一頁
+                }
+            }
+            false
         }
 
     }
