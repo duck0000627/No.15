@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work.*
 
@@ -30,15 +30,28 @@ class FarmWork : AppCompatActivity() {
                 }.show()
         }
 
-        ArrayAdapter.createFromResource(this,R.array.Code,android.R.layout.simple_spinner_item).also { adapter ->     //CODE下拉框
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner_Code.adapter = adapter
+        val code = arrayListOf("A","B","C","D","E","F")
+        val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,code)
+        spinner_Code.adapter = arrayAdapter
+        spinner_Code.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (code[p2] == "A"){
+                    A()
+                }
+                if (code[p2] == "F"){
+                    F()
+                }
+                if (code[p2] == "B" || code[p2] == "C" || code[p2] == "D" || code[p2] == "E"){
+                    BCDE()
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
 
         }
-        ArrayAdapter.createFromResource(this,R.array.Number,android.R.layout.simple_spinner_item).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner_Number.adapter = adapter
-        }
+
 
         button_to_muck.setOnClickListener{
             startActivity(Intent(this,MuckWork::class.java))
@@ -48,5 +61,53 @@ class FarmWork : AppCompatActivity() {
             startActivity(Intent(this,WormWork::class.java))
         }
 
+    }
+
+    private fun A(){                             //選到A時的函式
+        val number_A = arrayListOf("1","2")
+        val arrayAdapter_A = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_A)
+        spinner_Number.adapter = arrayAdapter_A
+        spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+    }
+
+    private fun F(){                                //選到F時的函式
+        val number_F = arrayListOf("1","2","3")
+        val arrayAdapter_F = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_F)
+        spinner_Number.adapter = arrayAdapter_F
+        spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                Toast.makeText(this@FarmWork,number_F[p2],Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+    }
+
+    private fun BCDE(){                                         //選到BCDE時的函式
+        val number_BCDE = arrayListOf("1","2","3","4","5","6")
+        val arrayAdapter_BCDE = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_BCDE)
+        spinner_Number.adapter = arrayAdapter_BCDE
+        spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                Toast.makeText(this@FarmWork,number_BCDE[p2],Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
     }
 }
