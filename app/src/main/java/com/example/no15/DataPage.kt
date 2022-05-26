@@ -1,18 +1,23 @@
 package com.example.no15
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_data_page.*
+import kotlinx.android.synthetic.main.farmwork_data_fragement.*
 
 
 class DataPage : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_page)
 
         add_record.setOnClickListener {
+            //紀錄(筆)按鈕
             startActivity(Intent(this, FarmWork::class.java))                //按按鈕切換到新增頁面
         }
 
@@ -52,10 +57,15 @@ class DataPage : AppCompatActivity() {
 
     }
 
+
+
+
+
     private fun replaceFragement(fragment: Fragment) {     //切換fragement的函式
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.main_fragement, fragment)
         fragmentTransaction.commit()
     }
+
 }

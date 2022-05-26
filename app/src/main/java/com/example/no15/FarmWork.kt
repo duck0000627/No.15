@@ -3,13 +3,15 @@ package com.example.no15
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work.*
+import kotlinx.android.synthetic.main.activity_muck_work.*
 
 class FarmWork : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farm_work)
@@ -17,7 +19,7 @@ class FarmWork : AppCompatActivity() {
         toolbar_Farmwork.inflateMenu(R.menu.add_toolbar)   //toolbar樣式載入
 
         toolbar_Farmwork.setNavigationOnClickListener{
-            Log.d("Alert","1")
+            //當返回的箭頭被點選
             AlertDialog.Builder(this)    //會跳一個提示框
                 .setTitle("捨棄")
                 .setMessage("確定捨棄紀錄內容?")
@@ -30,10 +32,11 @@ class FarmWork : AppCompatActivity() {
                 }.show()
         }
 
-        val code = arrayListOf("A","B","C","D","E","F")
+
+        val code = arrayListOf("A","B","C","D","E","F")       //田區代號
         val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,code)
         spinner_Code.adapter = arrayAdapter
-        spinner_Code.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinner_Code.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{         //下拉框被選之後
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (code[p2] == "A"){
                     A()
@@ -45,7 +48,6 @@ class FarmWork : AppCompatActivity() {
                     BCDE()
                 }
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
@@ -54,14 +56,16 @@ class FarmWork : AppCompatActivity() {
 
 
         button_to_muck.setOnClickListener{
-            startActivity(Intent(this,MuckWork::class.java))
+            startActivity(Intent(this,MuckWork::class.java))       //肥料使用紀錄按鈕
+        }
+        button_to_worm.setOnClickListener{
+            startActivity(Intent(this,WormWork::class.java))       //防治使用紀錄按鈕
         }
 
-        button_to_worm.setOnClickListener{
-            startActivity(Intent(this,WormWork::class.java))
-        }
 
     }
+
+
 
     private fun A(){                             //選到A時的函式
         val number_A = arrayListOf("1","2")
@@ -110,4 +114,5 @@ class FarmWork : AppCompatActivity() {
 
         }
     }
+
 }
