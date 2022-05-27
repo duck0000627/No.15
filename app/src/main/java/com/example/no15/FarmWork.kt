@@ -1,6 +1,7 @@
 package com.example.no15
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_muck_work.*
 
 class FarmWork : AppCompatActivity() {
 
+
+    private lateinit var dbrw: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,9 @@ class FarmWork : AppCompatActivity() {
                     startActivity(Intent(this, DataPage::class.java)) //案箭頭回上一頁
                 }.show()
         }
+
+        dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
+        addListener()
 
 
         val code = arrayListOf("A","B","C","D","E","F")       //田區代號
@@ -65,6 +71,28 @@ class FarmWork : AppCompatActivity() {
 
     }
 
+    override fun onDestroy() {
+        dbrw.close()  //關閉資料庫
+        super.onDestroy()
+    }
+
+    private fun addListener() {
+        button_add.setOnClickListener {
+            if (editText_Crop.length()<1 || editText_Date.length()<1 || editText_Work.length()<1){
+                Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
+            }else{
+                try {
+                    dbrw.execSQL("INSERT INTO FarmWorkDB(crop,date,code,number,work,tips) VALUES(?,?,?,?,?,?)",
+                        arrayOf(editText_Crop.text.toString(),editText_Date.text.toString(),
+                            spinner_Code.selectedItem.toString(),spinner_Number.selectedItem.toString(),
+                            editText_Work.text.toString(),editText_Tips.text.toString()))
+                    Toast.makeText(this,"success",Toast.LENGTH_SHORT).show()
+                }catch (e:Exception){
+                    Toast.makeText(this,"fail",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
 
     private fun A(){                             //選到A時的函式
