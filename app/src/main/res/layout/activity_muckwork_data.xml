@@ -4,22 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataPage"
+    tools:context=".MuckworkData"
     android:background="@color/background">
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/pen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -32,15 +18,15 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"/>
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+    <ListView
+        android:layout_width="409dp"
+        android:layout_height="659dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nodata_background" />
+        app:layout_constraintVertical_bias="0.972" >
+    </ListView>
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/layout_drawer"
@@ -50,10 +36,6 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:openDrawer="left">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/main_fragement"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_drawer"
@@ -66,6 +48,5 @@
 
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

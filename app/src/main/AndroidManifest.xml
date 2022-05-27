@@ -9,6 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.No15">
         <activity
+            android:name=".MuckworkData"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
             android:name=".WormWork"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
@@ -29,7 +33,7 @@
             android:exported="false"
             android:label="其他工作" />
         <activity
-            android:name=".DataPage"
+            android:name=".FarmworkData"
             android:exported="false"
             android:label="所有紀錄"
             android:theme="@style/Theme.Design.Light.NoActionBar" />

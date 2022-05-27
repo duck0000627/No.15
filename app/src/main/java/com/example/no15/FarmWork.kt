@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work.*
-import kotlinx.android.synthetic.main.activity_muck_work.*
 
 class FarmWork : AppCompatActivity() {
 
@@ -19,7 +18,6 @@ class FarmWork : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farm_work)
 
-        toolbar_Farmwork.inflateMenu(R.menu.add_toolbar)   //toolbar樣式載入
 
         toolbar_Farmwork.setNavigationOnClickListener{
             //當返回的箭頭被點選
@@ -31,12 +29,12 @@ class FarmWork : AppCompatActivity() {
                     Toast.makeText(this,"取消",Toast.LENGTH_SHORT).show()
                 }
                 .setPositiveButton("捨棄") {dialog,which ->
-                    startActivity(Intent(this, DataPage::class.java)) //案箭頭回上一頁
+                    startActivity(Intent(this, FarmworkData::class.java)) //案箭頭回上一頁
                 }.show()
         }
 
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
-        addListener()
+        addListener()                                       //新增資料
 
 
         val code = arrayListOf("A","B","C","D","E","F")       //田區代號
@@ -76,8 +74,8 @@ class FarmWork : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun addListener() {
-        button_add.setOnClickListener {
+    private fun addListener() {         //新增資料
+        button_Farmwork_add.setOnClickListener {
             if (editText_Crop.length()<1 || editText_Date.length()<1 || editText_Work.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else{
@@ -91,8 +89,14 @@ class FarmWork : AppCompatActivity() {
                     Toast.makeText(this,"fail",Toast.LENGTH_SHORT).show()
                 }
             }
+            startActivity(Intent(this,FarmworkData::class.java))
+            editText_Crop.setText("")
+            editText_Date.setText("")
+            editText_Work.setText("")
+            editText_Tips.setText("")
         }
     }
+
 
 
     private fun A(){                             //選到A時的函式

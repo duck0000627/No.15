@@ -9,6 +9,7 @@
         <entry key="..\:/No15/app/src/main/res/layout/activity_employee_login.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_farm_work.xml" value="0.2513586956521739" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_farmwork.xml" value="0.25364583333333335" />
+        <entry key="..\:/No15/app/src/main/res/layout/activity_farmwork_data.xml" value="0.24909420289855072" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_main.xml" value="0.2427536231884058" />
         <entry key="..\:/No15/app/src/main/res/layout/activity_muck_work.xml" value="0.2513586956521739" />
@@ -22,7 +23,8 @@
         <entry key="..\:/No15/app/src/main/res/layout/fragment_other_data.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/fragment_worm_data.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/login_alert.xml" value="0.25364583333333335" />
-        <entry key="..\:/No15/app/src/main/res/menu/add_toolbar.xml" value="0.1" />
+        <entry key="..\:/No15/app/src/main/res/layout/mydb.xml" value="0.18568840579710144" />
+        <entry key="..\:/No15/app/src/main/res/menu/add_toolbar.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/menu/farmwork_data_fragement.xml" value="0.2526041666666667" />
         <entry key="..\:/No15/app/src/main/res/menu/navigation_drawer.xml" value="0.25364583333333335" />
       </map>

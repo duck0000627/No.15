@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import kotlinx.android.synthetic.main.activity_data_page.*
 import kotlinx.android.synthetic.main.activity_farm_work.*
 import kotlinx.android.synthetic.main.activity_muck_work.*
 
