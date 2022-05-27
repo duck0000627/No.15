@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_data_page.*
 import kotlinx.android.synthetic.main.farmwork_data_fragement.*
 
@@ -15,6 +16,8 @@ class DataPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_page)
+
+        Stetho.initializeWithDefaults(this);
 
         add_record.setOnClickListener {
             //紀錄(筆)按鈕
@@ -54,6 +57,8 @@ class DataPage : AppCompatActivity() {
             }
             return@setNavigationItemSelectedListener true
         }
+
+
 
     }
 
