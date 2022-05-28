@@ -53,6 +53,7 @@ class WormworkData : AppCompatActivity() {
                 }
                 R.id.drawer_other -> {         //其他按鈕被點選
 //                    replaceFragement(Other_Data_Fragment())
+                    startActivity(Intent(this,OtherworkData::class.java))
                     layout_drawer_Wormwork.closeDrawer(navigation_drawer_Wormwork)
                 }
                 R.id.drawer_logout -> {      //登出

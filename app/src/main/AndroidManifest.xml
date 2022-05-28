@@ -9,6 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.No15">
         <activity
+            android:name=".OtherworkData"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
             android:name=".WormworkData"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
@@ -35,7 +39,8 @@
         <activity
             android:name=".OtherWork"
             android:exported="false"
-            android:label="其他工作" />
+            android:label="其他工作"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".FarmworkData"
             android:exported="false"

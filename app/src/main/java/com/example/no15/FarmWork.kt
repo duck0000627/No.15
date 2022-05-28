@@ -18,7 +18,6 @@ class FarmWork : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farm_work)
 
-
         toolbar_Farmwork.setNavigationOnClickListener{
             //當返回的箭頭被點選
             AlertDialog.Builder(this)    //會跳一個提示框

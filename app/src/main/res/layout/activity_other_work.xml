@@ -8,17 +8,16 @@
     android:background="@color/background">
 
     <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/editText_OtherText"
+        android:layout_width="367dp"
+        android:layout_height="48dp"
         android:ems="10"
-        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintHorizontal_bias="0.772"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.374" />
+        app:layout_constraintVertical_bias="0.373" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_Otherwork"
@@ -60,7 +59,7 @@
         app:layout_constraintVertical_bias="0.11" />
 
     <EditText
-        android:id="@+id/editTextDate2"
+        android:id="@+id/editText_OtherDate"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -71,4 +70,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.192" />
+
+    <Button
+        android:id="@+id/btn_Otherwork_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新增"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.656" />
 </androidx.constraintlayout.widget.ConstraintLayout>

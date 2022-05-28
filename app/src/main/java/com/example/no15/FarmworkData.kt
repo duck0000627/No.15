@@ -58,6 +58,7 @@ class FarmworkData : AppCompatActivity() {
                 }
                 R.id.drawer_other -> {         //其他按鈕被點選
 //                    replaceFragement(Other_Data_Fragment())
+                    startActivity(Intent(this,OtherworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)
                 }
                 R.id.drawer_logout -> {      //登出
@@ -79,7 +80,7 @@ class FarmworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("農作物:${c.getString(0)}日期:${c.getString(1)}工作項目:${c.getString(5)}田園代號:${c.getString(3)}${c.getString(4)}備註:${c.getString(5)}")
+            items.add("農作物:${c.getString(0)}日期:${c.getString(1)}工作項目:${c.getString(4)}田園代號:${c.getString(2)}${c.getString(3)}備註:${c.getString(5)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()
