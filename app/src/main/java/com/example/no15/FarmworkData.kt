@@ -53,6 +53,7 @@ class FarmworkData : AppCompatActivity() {
                 }
                 R.id.drawer_worm -> {          //病蟲害按鈕被點選
 //                    replaceFragement(Worm_Data_Fragment())
+                    startActivity(Intent(this,WormworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)
                 }
                 R.id.drawer_other -> {         //其他按鈕被點選

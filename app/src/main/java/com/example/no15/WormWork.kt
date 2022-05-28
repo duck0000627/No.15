@@ -1,6 +1,7 @@
 package com.example.no15
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +12,13 @@ import kotlinx.android.synthetic.main.activity_muck_work.*
 import kotlinx.android.synthetic.main.activity_worm_work.*
 
 class WormWork : AppCompatActivity() {
+
+    private lateinit var dbrw: SQLiteDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worm_work)
 
-        toolbar_Wormwork.inflateMenu(R.menu.add_toolbar)   //toolbar樣式載入
 
         toolbar_Wormwork.setNavigationOnClickListener{
             Log.d("Alert","1")
@@ -40,5 +43,45 @@ class WormWork : AppCompatActivity() {
             false
         }
 
+        dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
+        addListener()                                       //新增資料
+
+    }
+
+    override fun onDestroy() {
+        dbrw.close()  //關閉資料庫
+        super.onDestroy()
+    }
+
+    private fun addListener() {         //新增資料
+        btn_worm_add.setOnClickListener {
+            if (editText_WormWho.length()<1 || editText_WormName.length()<1 || editText_WormNumber.length()<1 || editText_WormUse.length()<1 || editText_WormMultiple.length()<1){
+                Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
+            }else {
+                try {
+                    dbrw.execSQL(
+                        "INSERT INTO WormWorkDB(who,name,number,use,multiple,other) VALUES(?,?,?,?,?,?)",
+                        arrayOf(
+                            editText_WormWho.text.toString(),
+                            editText_WormName.text.toString(),
+                            editText_WormNumber.text.toString(),
+                            editText_WormUse.text.toString(),
+                            editText_WormMultiple.text.toString(),
+                            editText_WormOther.text.toString()
+                        )
+                    )
+                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                }
+                startActivity(Intent(this, WormworkData::class.java))
+                editText_WormWho.setText("")
+                editText_WormName.setText("")
+                editText_WormNumber.setText("")
+                editText_WormUse.setText("")
+                editText_WormMultiple.setText("")
+                editText_WormOther.setText("")
+            }
+        }
     }
 }
