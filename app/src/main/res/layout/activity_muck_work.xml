@@ -30,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintVertical_bias="0.11" />
 
     <TextView
         android:id="@+id/textView6"
@@ -41,10 +41,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.344" />
+        app:layout_constraintVertical_bias="0.33" />
 
     <TextView
         android:id="@+id/textView7"
@@ -58,9 +58,10 @@
         app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintVertical_bias="0.527" />
 
     <RadioGroup
+        android:id="@+id/RG_muck"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,14 +69,11 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintVertical_bias="0.215">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/rdb_run"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="追肥"
@@ -83,12 +81,11 @@
                 android:textSize="34sp" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/rdb_basic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="基肥"
                 android:textSize="34sp" />
-        </FrameLayout>
 
     </RadioGroup>
 
@@ -110,7 +107,6 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:ems="10"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.21"
@@ -128,4 +124,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.628" />
+
+    <Button
+        android:id="@+id/btn_Muckwork_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新增"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.764" />
 </androidx.constraintlayout.widget.ConstraintLayout>

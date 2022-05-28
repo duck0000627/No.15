@@ -78,22 +78,29 @@ class FarmWork : AppCompatActivity() {
         button_Farmwork_add.setOnClickListener {
             if (editText_Crop.length()<1 || editText_Date.length()<1 || editText_Work.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
-            }else{
+            }else {
                 try {
-                    dbrw.execSQL("INSERT INTO FarmWorkDB(crop,date,code,number,work,tips) VALUES(?,?,?,?,?,?)",
-                        arrayOf(editText_Crop.text.toString(),editText_Date.text.toString(),
-                            spinner_Code.selectedItem.toString(),spinner_Number.selectedItem.toString(),
-                            editText_Work.text.toString(),editText_Tips.text.toString()))
-                    Toast.makeText(this,"success",Toast.LENGTH_SHORT).show()
-                }catch (e:Exception){
-                    Toast.makeText(this,"fail",Toast.LENGTH_SHORT).show()
+                    dbrw.execSQL(
+                        "INSERT INTO FarmWorkDB(crop,date,code,number,work,tips) VALUES(?,?,?,?,?,?)",
+                        arrayOf(
+                            editText_Crop.text.toString(),
+                            editText_Date.text.toString(),
+                            spinner_Code.selectedItem.toString(),
+                            spinner_Number.selectedItem.toString(),
+                            editText_Work.text.toString(),
+                            editText_Tips.text.toString()
+                        )
+                    )
+                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                 }
+                startActivity(Intent(this, FarmworkData::class.java))
+                editText_Crop.setText("")
+                editText_Date.setText("")
+                editText_Work.setText("")
+                editText_Tips.setText("")
             }
-            startActivity(Intent(this,FarmworkData::class.java))
-            editText_Crop.setText("")
-            editText_Date.setText("")
-            editText_Work.setText("")
-            editText_Tips.setText("")
         }
     }
 

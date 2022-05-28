@@ -1,6 +1,5 @@
 package com.example.no15
 
-import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
@@ -22,18 +21,18 @@ class FarmworkData : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farmwork_data)
 
-        Stetho.initializeWithDefaults(this);     //看資料庫的套件程式
+        Stetho.initializeWithDefaults(this)     //看資料庫的套件程式
 
         dbrw = MyDBHelper(this).writableDatabase
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         LV_farmwork.adapter = adapter
 
-        add_record.setOnClickListener {
+        add_record_farmwork.setOnClickListener {
             //紀錄(筆)按鈕
             startActivity(Intent(this, FarmWork::class.java))                //按按鈕切換到新增頁面
         }
 
-        toolbar.setNavigationOnClickListener {
+        toolbar_farmwork_data.setNavigationOnClickListener {
             if (layout_drawer.isDrawerOpen(navigation_drawer)) {            //如果側邊欄是開的就關掉
                 layout_drawer.closeDrawer(navigation_drawer)
             } else {
@@ -45,11 +44,11 @@ class FarmworkData : AppCompatActivity() {
             when (it.itemId) {
                 R.id.drawer_farmwork -> {      //農場工作按鈕被點選
 //                    replaceFragement(FarmWork_Data_Fragement())  //切換fragement
-                    startActivity(Intent(this,MuckworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)   //收側邊框
                 }
                 R.id.drawer_muck -> {          //肥料按鈕被點選
 //                    replaceFragement(Muck_Data_Fragment())
+                    startActivity(Intent(this,MuckworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)
                 }
                 R.id.drawer_worm -> {          //病蟲害按鈕被點選

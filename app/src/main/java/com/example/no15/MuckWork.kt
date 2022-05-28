@@ -1,6 +1,7 @@
 package com.example.no15
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +12,14 @@ import kotlinx.android.synthetic.main.activity_farm_work.*
 import kotlinx.android.synthetic.main.activity_muck_work.*
 
 class MuckWork : AppCompatActivity() {
+
+    private lateinit var dbrw: SQLiteDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_muck_work)
 
-        toolbar_Muckwork.inflateMenu(R.menu.add_toolbar)   //toolbar樣式載入
+//        toolbar_Muckwork.inflateMenu(R.menu.add_toolbar)   //toolbar樣式載入
 
         toolbar_Muckwork.setNavigationOnClickListener{
             Log.d("Alert","1")
@@ -46,5 +50,39 @@ class MuckWork : AppCompatActivity() {
             false
         }
 
+        dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
+        addListener()                                       //新增資料
+
+    }
+
+    override fun onDestroy() {
+        dbrw.close()  //關閉資料庫
+        super.onDestroy()
+    }
+
+    private fun addListener() {
+        btn_Muckwork_add.setOnClickListener {
+            if (editText_MuckName.length()<1 || editText_UseNumber.length()<1){
+                Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
+            }else {
+                try {
+                    dbrw.execSQL(
+                        "INSERT INTO MuckWorkDB(type,muckname,count,counttype) VALUES(?,?,?,?)",
+                        arrayOf(
+                            (RG_muck.checkedRadioButtonId).toString(),
+                            editText_MuckName.text.toString(),
+                            editText_UseNumber.text.toString(),
+                            spinner_UseNumber.selectedItem.toString()
+                        )
+                    )
+                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                }
+                startActivity(Intent(this, FarmWork::class.java))
+                editText_MuckName.setText("")
+                editText_UseNumber.setText("")
+            }
+        }
     }
 }

@@ -10,15 +10,17 @@ class MyDBHelper(context: Context,
                  version: Int = v):SQLiteOpenHelper(context, name, factory, version) {
                      companion object{
                          private const val database = "FarmWorkDatabase"
-                         private const val v = 1
+                         private const val v = 2
                      }
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE FarmWorkDB(crop text PRIMARY KEY,date text NOT NULL,code text NOT NULL,number text NOT NULL,work text NOT NULL,tips text)")
+        db.execSQL("CREATE TABLE MuckWorkDB(type text PRIMARY KEY,muckname text NOT NULL,count text NOT NULL,counttype text NOT NULL)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS FarmWorkDatabase")
+        db.execSQL("DROP TABLE IF EXISTS FarmWorkDB")
+        db.execSQL("DROP TABLE IF EXISTS MuckWorkDB")
         onCreate(db)
     }
 }
