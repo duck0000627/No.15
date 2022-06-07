@@ -66,4 +66,27 @@
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="57dp">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="日期" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="內容" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
