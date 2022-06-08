@@ -88,14 +88,4 @@ class FarmworkData : AppCompatActivity() {
     }
 
 
-
-
-
-//    private fun replaceFragement(fragment: Fragment) {     //切換fragement的函式
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.main_fragement, fragment)
-//        fragmentTransaction.commit()
-//    }
-
 }
