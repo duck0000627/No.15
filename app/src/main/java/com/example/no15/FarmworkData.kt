@@ -72,24 +72,7 @@ class FarmworkData : AppCompatActivity() {
         }
 
         show()
-        click()
-    }
 
-
-
-    private fun show(){
-        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB",null)
-        c.moveToFirst()
-        items.clear()
-        for (i in 0 until c.count){
-            items.add("農作物:${c.getString(0)}日期:${c.getString(1)}工作項目:${c.getString(4)}田園代號:${c.getString(2)}${c.getString(3)}備註:${c.getString(5)}")
-            c.moveToNext()
-        }
-        adapter.notifyDataSetChanged()
-        c.close()
-    }
-
-    private fun click(){
         LV_farmwork.setOnItemClickListener { adapterView, view, i, l ->
             var date = ""
             var crop = ""
@@ -97,12 +80,11 @@ class FarmworkData : AppCompatActivity() {
             var code = ""
             var number = ""
             var tips = ""
-            var data = arrayOf("date","crop","work","code","number","tips")
+//            var data = arrayOf("date","crop","work","code","number","tips")
             val click = l
-            val search = "SELECT * FROM FarmWorkDB WHERE rowid LIKE '${click}'"
+            val search = "SELECT * FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'"
             val c = dbrw.rawQuery(search,null)
             c.moveToFirst()
-            items.clear()
             for (i in 0 until c.count){
                 date = "${c.getString(1)}"
                 crop = "${c.getString(0)}"
@@ -112,21 +94,35 @@ class FarmworkData : AppCompatActivity() {
                 tips = "${c.getString(5)}"
                 c.moveToNext()
             }
+
             Toast.makeText(this,"${l}",Toast.LENGTH_SHORT).show()
-            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
+//            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
             AlertDialog.Builder(this)
                 .setTitle("日期:${date}")
-                .setMessage("${work}\n田區:\t\t\t${code}${number}\n備註:\t\t\t${tips}")
-                .setPositiveButton("確認"){ dialog,which ->
+                .setMessage("${work}\n田區:${code}${number}\n備註:${tips}")
+                .setPositiveButton("刪除"){ dialog,which ->
                     Toast.makeText(this,"yes",Toast.LENGTH_SHORT).show()
                 }
-                .setNegativeButton("確認"){ dialog,which ->
+                .setNegativeButton("編輯"){ dialog,which ->
                     Toast.makeText(this,"yes",Toast.LENGTH_SHORT).show()
                 }.show()
-
+            adapter.notifyDataSetChanged()
             c.close()
         }
+
     }
 
+
+    private fun show(){
+        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB",null)
+        c.moveToFirst()
+        items.clear()
+        for (i in 0 until c.count){
+            items.add("農作物:${c.getString(0)}")
+            c.moveToNext()
+        }
+        adapter.notifyDataSetChanged()
+//        c.close()
+    }
 
 }
