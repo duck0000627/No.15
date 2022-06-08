@@ -33,17 +33,6 @@
         android:elevation="4dp"/>
 
 
-    <ListView
-        android:id="@+id/LV_farmwork"
-        android:layout_width="409dp"
-        android:layout_height="601dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
-
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/layout_drawer"
         android:layout_width="match_parent"
@@ -52,7 +41,6 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_farmwork_data"
         tools:openDrawer="left"
         tools:visibility="gone">
-
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_drawer"
@@ -105,6 +93,17 @@
             android:text="備註"
             android:textAlignment="center" />
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/LV_farmwork"
+        android:layout_width="409dp"
+        android:layout_height="601dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
