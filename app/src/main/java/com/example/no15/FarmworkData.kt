@@ -12,9 +12,6 @@ import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_farmwork_data.*
 import kotlinx.android.synthetic.main.activity_farmwork_data.layout_drawer
 import kotlinx.android.synthetic.main.activity_farmwork_data.navigation_drawer
-import kotlinx.android.synthetic.main.activity_muckwork_data.*
-import kotlinx.android.synthetic.main.activity_otherwork_data.*
-import kotlinx.android.synthetic.main.activity_wormwork_data.*
 
 
 class FarmworkData : AppCompatActivity() {
@@ -103,16 +100,31 @@ class FarmworkData : AppCompatActivity() {
             }
 
             Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
-            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
+
+            val view =  if (work == "防病蟲害") {       //根據點開的顯示alert的圖片
+                LayoutInflater.from(this).inflate(R.layout.activity_worm_alert, null)
+            } else if (work == "除草") {
+                LayoutInflater.from(this).inflate(R.layout.grass_alert, null)
+            } else if (work == "施肥"){
+                LayoutInflater.from(this).inflate(R.layout.muck_alert, null)
+            } else if (work == "灌溉"){
+                LayoutInflater.from(this).inflate(R.layout.water_alert, null)
+            } else if (work == "播種"){
+                LayoutInflater.from(this).inflate(R.layout.seed_alert, null)
+            } else{
+                LayoutInflater.from(this).inflate(R.layout.land_alert, null)
+            }
+
             AlertDialog.Builder(this)
                 .setTitle("日期:${date}")
+                .setView(view)
                 .setMessage("${work}\n田區:\t\t\t${code}${number}\n備註:\t\t\t${tips}")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
                         dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
                         Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
                         adapter.notifyDataSetChanged()
-                        startActivity(Intent(this,FarmworkData::class.java))
+                        startActivity(Intent(this, FarmworkData::class.java))
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
@@ -122,7 +134,7 @@ class FarmworkData : AppCompatActivity() {
                         dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
                         Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
                         adapter.notifyDataSetChanged()
-                        startActivity(Intent(this,FarmworkData::class.java))
+                        startActivity(Intent(this, FarmworkData::class.java))
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
@@ -139,10 +151,11 @@ class FarmworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count) {
-            items.add("農作物:${c.getString(0)}")
+            items.add("日期:${c.getString(1)}\t\t\t工作項目 :${c.getString(4)}田區代號:${c.getString(2)}${c.getString(3)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()
     }
+
 
 }

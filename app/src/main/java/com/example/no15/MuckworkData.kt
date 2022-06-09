@@ -122,7 +122,7 @@ class MuckworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("名稱:${c.getString(1)}使用量:${c.getString(2)}${c.getString(3)}")
+            items.add("名稱:${c.getString(1)}\n施肥別 :${c.getString(0)}使用量:${c.getString(2)}${c.getString(3)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()
