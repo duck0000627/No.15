@@ -81,7 +81,7 @@ class FarmworkData : AppCompatActivity() {
 
         show()
 
-        LV_farmwork.setOnItemClickListener { adapterView, view, i, l ->
+        LV_farmwork.setOnItemClickListener { adapterView, view, i, l ->     //點擊顯示
             var date = ""
             var crop = ""
             var work = ""
@@ -103,7 +103,7 @@ class FarmworkData : AppCompatActivity() {
                 c.moveToNext()
             }
 
-            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
 
             val view = if (work == "防病蟲害") {       //根據點開的顯示alert的圖片
                 LayoutInflater.from(this).inflate(R.layout.activity_worm_alert, null)
@@ -119,7 +119,7 @@ class FarmworkData : AppCompatActivity() {
                 LayoutInflater.from(this).inflate(R.layout.land_alert, null)
             }
 
-            AlertDialog.Builder(this)
+            AlertDialog.Builder(this)      //小框框
                 .setTitle("日期:${date}")
                 .setView(view)
                 .setMessage("${work}\n田區:\t\t\t${code}${number}\n備註:\t\t\t${tips}")
@@ -173,7 +173,10 @@ class FarmworkData : AppCompatActivity() {
         items.clear()
         for (i in 0 until c.count) {
             items.add(
-                "${c.getString(1)}\t\t\t${c.getString(4)}\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}\t\t\t\t${c.getString(5)}"
+                "\t\t\t\t${c.getString(1)}" +
+                        "\t\t\t\t\t\t\t\t${c.getString(4)}" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}" +
+                        "\t\t\t\t\t\t\t\t\t\t\t${c.getString(5)}"
             )
             c.moveToNext()
         }

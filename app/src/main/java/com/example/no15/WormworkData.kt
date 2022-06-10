@@ -7,10 +7,6 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import kotlinx.android.synthetic.main.activity_farmwork_data.*
-import kotlinx.android.synthetic.main.activity_farmwork_data.layout_drawer
-import kotlinx.android.synthetic.main.activity_muckwork_data.*
-import kotlinx.android.synthetic.main.activity_otherwork_data.*
 import kotlinx.android.synthetic.main.activity_wormwork_data.*
 
 class WormworkData : AppCompatActivity() {
@@ -31,7 +27,7 @@ class WormworkData : AppCompatActivity() {
 
         add_record_wormwork.setOnClickListener {
             //紀錄(筆)按鈕
-            startActivity(Intent(this, WormWork::class.java))                //按按鈕切換到新增頁面
+            startActivity(Intent(this, FarmWork::class.java))                //按按鈕切換到新增頁面
         }
 
         toolbar_wormwork_data.setNavigationOnClickListener {
@@ -79,30 +75,45 @@ class WormworkData : AppCompatActivity() {
         LV_wormwork.setOnItemClickListener { adapterView, view, i, l ->
             var who = ""
             var name = ""
+            var farmnumber = ""
             var number = ""
             var use = ""
             var multiple = ""
             var other = ""
+            var date = ""
+            var code = ""
+            var crop = ""
 //            var data = arrayOf("date","crop","work","code","number","tips")
             val click = l
             val search = "SELECT * FROM WormWorkDB WHERE (rowid-1) LIKE '${click}'"
             val c = dbrw.rawQuery(search, null)
             c.moveToFirst()
             for (i in 0 until c.count) {
-                name = "${c.getString(1)}"
-                who = "${c.getString(0)}"
-                multiple = "${c.getString(4)}"
-                number = "${c.getString(2)}"
-                use = "${c.getString(3)}"
-                other = "${c.getString(5)}"
+                name = "${c.getString(11)}"
+                who = "${c.getString(10)}"
+                multiple = "${c.getString(14)}"
+                number = "${c.getString(12)}"
+                use = "${c.getString(13)}"
+                other = "${c.getString(15)}"
+                date = "${c.getString(1)}"
+                crop = "${c.getString(0)}"
+                code = "${c.getString(2)}"
+                farmnumber = "${c.getString(3)}"
                 c.moveToNext()
             }
 
-            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
 //            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
             AlertDialog.Builder(this)
-                .setTitle("")
-                .setMessage("防治對象 :${who}\n資材名稱:\t\t\t${name}\n批號 :${number}\n使用量:\t\t\t${use}倍\n稀釋倍數:\t\t\t${multiple}倍\n其他:\t\t\t${other}")
+                .setTitle("${date}")
+                .setMessage("田區:${code}${farmnumber}\n" +
+                        "農作物:${crop}" +
+                        "防治對象 :${who}\n" +
+                        "資材名稱:\t\t\t${name}\n" +
+                        "批號 :${number}\n" +
+                        "使用量:\t\t\t${use}\n" +
+                        "稀釋倍數:\t\t\t${multiple}倍\n" +
+                        "其他:\t\t\t${other}")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
 //                        dbrw.execSQL("DELETE FROM WormWorkDB WHERE (rowid-1) LIKE '${click}'")
@@ -126,7 +137,11 @@ class WormworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("名稱:${c.getString(1)}\t\t\t批號:${c.getString(2)}\n防治對象:${c.getString(0)}\n使用量:${c.getString(3)}稀釋倍數:${c.getString(4)}\n其他防治方法:${c.getString(5)}")
+            items.add("日期:${c.getString(1)}\n" +
+                    "${c.getString(2)}${c.getString(3)}\t\t\t\t\t${c.getString(11)}\t\t\t\t\t\t${c.getString(12)}\n" +
+                    "農作物:${c.getString(0)}\t\t\t\t\t\t\t\t防治對象:${c.getString(10)}\n" +
+                    "使用量:${c.getString(13)}\t\t\t\t\t\t\t\t\t稀釋倍數:${c.getString(14)}倍\n" +
+                    "其他防治方法:${c.getString(15)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()

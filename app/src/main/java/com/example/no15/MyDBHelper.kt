@@ -10,11 +10,13 @@ class MyDBHelper(context: Context,
                  version: Int = v):SQLiteOpenHelper(context, name, factory, version) {
                      companion object{
                          private const val database = "FarmWorkDatabase"
-                         private const val v = 8
+                         private const val v = 10
                      }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE FarmWorkDB(crop text PRIMARY KEY,date text NOT NULL,code text NOT NULL,number text NOT NULL,work text NOT NULL,tips text)")
+        db.execSQL("CREATE TABLE FarmWorkDB(crop text PRIMARY KEY,date text NOT NULL,code text NOT NULL,number text NOT NULL,work text NOT NULL,tips text," +
+                "mucktype text,muckname text,muckcount text,muckcounttype text," +
+                "wormwho text,wormname text,wormnumber text,wormuse text,wormmultiple text,wormother text)")
         db.execSQL("CREATE TABLE MuckWorkDB(type text PRIMARY KEY,muckname text NOT NULL,count text NOT NULL,counttype text NOT NULL)")
         db.execSQL("CREATE TABLE WormWorkDB(who text PRIMARY KEY,name text NOT NULL,number text NOT NULL,use text NOT NULL,multiple text NOT NULL,other text)")
         db.execSQL("CREATE TABLE OtherWorkDB(date text PRIMARY KEY,text text NOT NULL)")

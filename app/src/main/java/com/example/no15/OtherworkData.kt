@@ -93,7 +93,7 @@ class OtherworkData : AppCompatActivity() {
                 c.moveToNext()
             }
 
-            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
 //            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
             AlertDialog.Builder(this)
                 .setTitle("日期:${date}")

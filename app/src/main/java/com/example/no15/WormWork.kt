@@ -15,6 +15,13 @@ class WormWork : AppCompatActivity() {
 
     private lateinit var dbrw: SQLiteDatabase
 
+    private var who:String = ""
+    private var name:String = ""
+    private var number:String = ""
+    private var use:String = ""
+    private var multiple:String = ""
+    private var other:String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worm_work)
@@ -44,7 +51,51 @@ class WormWork : AppCompatActivity() {
         }
 
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
-        addListener()                                       //新增資料
+        btn_worm_add.setOnClickListener {
+            if (editText_WormWho.length()<1 || editText_WormName.length()<1 || editText_WormNumber.length()<1 || editText_WormUse.length()<1 || editText_WormMultiple.length()<1){
+                Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
+            }else {
+                try {
+//                    dbrw.execSQL(
+//                        "INSERT INTO WormWorkDB(who,name,number,use,multiple,other) VALUES(?,?,?,?,?,?)",
+//                        arrayOf(
+//                            editText_WormWho.text.toString(),
+//                            editText_WormName.text.toString(),
+//                            editText_WormNumber.text.toString(),
+//                            editText_WormUse.text.toString(),
+//                            editText_WormMultiple.text.toString(),
+//                            editText_WormOther.text.toString()
+//                        )
+//                    )
+                    who = editText_WormWho.text.toString()
+                    name = editText_WormName.text.toString()
+                    number = editText_WormNumber.text.toString()
+                    use = editText_WormUse.text.toString()
+                    multiple = editText_WormMultiple.text.toString()
+                    other = editText_WormOther.text.toString()
+                    val bundle = Bundle()
+                    bundle.putString("who","${who}")
+                    bundle.putString("name","${name}")
+                    bundle.putString("number","${number}")
+                    bundle.putString("use","${use}")
+                    bundle.putString("multiple","${multiple}")
+                    bundle.putString("other","${other}")
+                    val intent = Intent(this,FarmWork::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                    editText_WormWho.setText("")
+                    editText_WormName.setText("")
+                    editText_WormNumber.setText("")
+                    editText_WormUse.setText("")
+                    editText_WormMultiple.setText("")
+                    editText_WormOther.setText("")
+                } catch (e: Exception) {
+                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
 
     }
 
@@ -53,35 +104,16 @@ class WormWork : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun addListener() {         //新增資料
-        btn_worm_add.setOnClickListener {
-            if (editText_WormWho.length()<1 || editText_WormName.length()<1 || editText_WormNumber.length()<1 || editText_WormUse.length()<1 || editText_WormMultiple.length()<1){
-                Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
-            }else {
-                try {
-                    dbrw.execSQL(
-                        "INSERT INTO WormWorkDB(who,name,number,use,multiple,other) VALUES(?,?,?,?,?,?)",
-                        arrayOf(
-                            editText_WormWho.text.toString(),
-                            editText_WormName.text.toString(),
-                            editText_WormNumber.text.toString(),
-                            editText_WormUse.text.toString(),
-                            editText_WormMultiple.text.toString(),
-                            editText_WormOther.text.toString()
-                        )
-                    )
-                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
-                } catch (e: Exception) {
-                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
-                }
-                startActivity(Intent(this, WormworkData::class.java))
-                editText_WormWho.setText("")
-                editText_WormName.setText("")
-                editText_WormNumber.setText("")
-                editText_WormUse.setText("")
-                editText_WormMultiple.setText("")
-                editText_WormOther.setText("")
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)    //會跳一個提示框
+            .setTitle("捨棄")
+            .setMessage("確定捨棄紀錄內容?")
+            .setNegativeButton("取消"){
+                    dialog, which->
+                Toast.makeText(this,"取消", Toast.LENGTH_SHORT).show()
             }
-        }
+            .setPositiveButton("捨棄") {dialog,which ->
+                startActivity(Intent(this, FarmWork::class.java)) //案箭頭回上一頁
+            }.show()
     }
 }

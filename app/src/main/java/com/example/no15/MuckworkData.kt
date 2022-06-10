@@ -33,7 +33,7 @@ class MuckworkData : AppCompatActivity() {
 
         add_record_muckwork.setOnClickListener {
             //紀錄(筆)按鈕
-            startActivity(Intent(this, MuckWork::class.java))                //按按鈕切換到新增頁面
+            startActivity(Intent(this, FarmWork::class.java))                //按按鈕切換到新增頁面
         }
 
         toolbar_muckwork_data.setNavigationOnClickListener {
@@ -82,24 +82,36 @@ class MuckworkData : AppCompatActivity() {
             var type = ""
             var counttype = ""
             var count = ""
+            var date = ""
+            var code = ""
+            var number = ""
+            var crop = ""
 //            var data = arrayOf("date","crop","work","code","number","tips")
             val click = l
-            val search = "SELECT * FROM MuckWorkDB WHERE (rowid-1) LIKE '${click}'"
+            val search = "SELECT * FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'"
             val c = dbrw.rawQuery(search, null)
             c.moveToFirst()
             for (i in 0 until c.count) {
-                muckname = "${c.getString(1)}"
-                type = "${c.getString(0)}"
-                counttype = "${c.getString(3)}"
-                count = "${c.getString(2)}"
+                muckname = "${c.getString(7)}"
+                type = "${c.getString(6)}"
+                counttype = "${c.getString(9)}"
+                count = "${c.getString(8)}"
+                date = "${c.getString(1)}"
+                code = "${c.getString(2)}"
+                number = "${c.getString(3)}"
+                crop = "${c.getString(0)}"
                 c.moveToNext()
             }
 
 //            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
 //            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
             AlertDialog.Builder(this)
-                .setTitle("施肥別 :${type}")
-                .setMessage("名稱 :${muckname}\n使用量 :\t\t\t${count}${counttype}")
+                .setTitle("${date}")
+                .setMessage("田區:${code}${number}\n" +
+                        "農作物:\t\t\t${crop}\n" +
+                        "施肥別:\t\t\t${type}\n" +
+                        "資材名稱 :${muckname}\n" +
+                        "使用量 :\t\t\t${count}${counttype}")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
 //                        dbrw.execSQL("DELETE FROM MuckWorkDB WHERE (rowid-1) LIKE '${click}'")
@@ -119,11 +131,13 @@ class MuckworkData : AppCompatActivity() {
     }
 
     private fun show(){
-        val c = dbrw.rawQuery("SELECT * FROM MuckWorkDB",null)
+        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB",null)
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("名稱:${c.getString(1)}\n施肥別 :${c.getString(0)}\t\t\t使用量:${c.getString(2)}${c.getString(3)}")
+            items.add("${c.getString(1)}\n" +
+                    "${c.getString(2)}${c.getString(3)}\t\t\t\t\t\t\t\t\t\t${c.getString(7)}\t\t\t\t\t\t\t\t${c.getString(6)}\n" +
+                    "農作物:\t\t\t\t\t\t\t${c.getString(0)}\t\t\t\t\t\t\t\t\t\t\t\t\t使用量:${c.getString(8)}${c.getString(9)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()
