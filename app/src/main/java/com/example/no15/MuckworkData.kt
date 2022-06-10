@@ -135,9 +135,11 @@ class MuckworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("${c.getString(1)}\n" +
-                    "${c.getString(2)}${c.getString(3)}\t\t\t\t\t\t\t\t\t\t${c.getString(7)}\t\t\t\t\t\t\t\t${c.getString(6)}\n" +
-                    "農作物:\t\t\t\t\t\t\t${c.getString(0)}\t\t\t\t\t\t\t\t\t\t\t\t\t使用量:${c.getString(8)}${c.getString(9)}")
+            if (c.getString(8).length > 0){
+                items.add("${c.getString(1)}\n" +
+                        "${c.getString(2)}${c.getString(3)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(7)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(6)}\n" +
+                        "農作物:\t\t\t\t\t\t\t\t\t${c.getString(0)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t使用量:${c.getString(8)}${c.getString(9)}")
+            }
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()

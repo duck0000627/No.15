@@ -21,10 +21,25 @@ class WormWork : AppCompatActivity() {
     private var use:String = ""
     private var multiple:String = ""
     private var other:String = ""
+    private var A:String? = ""
+    private var B:String? = ""
+    private var C:String? = ""
+    private var D:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worm_work)
+
+        intent?.extras?.let {
+            val a = it.getString("mucktype")
+            val b = it.getString("muckname")
+            val c = it.getString("count")
+            val d = it.getString("counttype")
+            A = a
+            B = b
+            C = c
+            D = d
+        }
 
 
         toolbar_Wormwork.setNavigationOnClickListener{
@@ -80,6 +95,10 @@ class WormWork : AppCompatActivity() {
                     bundle.putString("use","${use}")
                     bundle.putString("multiple","${multiple}")
                     bundle.putString("other","${other}")
+                    bundle.putString("mucktype","${A}")
+                    bundle.putString("muckname","${B}")
+                    bundle.putString("count","${C}")
+                    bundle.putString("counttype","${D}")
                     val intent = Intent(this,FarmWork::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)

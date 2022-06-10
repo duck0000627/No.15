@@ -21,9 +21,32 @@ class MuckWork : AppCompatActivity() {
     private var muckname:String = ""
     private var count:String = ""
     private var counttype:String = ""
+
+    private var E:String? = ""
+    private var F:String? = ""
+    private var G:String? = ""
+    private var H:String? = ""
+    private var I:String? = ""
+    private var J:String? = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_muck_work)
+
+        intent?.extras?.let {
+            val e = it.getString("who")
+            val f = it.getString("name")
+            val g = it.getString("use")
+            val h = it.getString("multiple")
+            val i = it.getString("other")
+            val j = it.getString("number")
+            E = e
+            F = f
+            G = g
+            H = h
+            I = i
+            J = j
+        }
 
         ArrayAdapter.createFromResource(this,R.array.use_number,android.R.layout.simple_spinner_item).also { adapter ->     //使用量下拉框
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -58,6 +81,12 @@ class MuckWork : AppCompatActivity() {
                     bundle.putString("muckname","${muckname}")
                     bundle.putString("count","${count}")
                     bundle.putString("counttype","${counttype}")
+                    bundle.putString("who","${E}")
+                    bundle.putString("name","${F}")
+                    bundle.putString("number","${G}")
+                    bundle.putString("use","${H}")
+                    bundle.putString("multiple","${I}")
+                    bundle.putString("other","${J}")
                     val intent = Intent(this,FarmWork::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)

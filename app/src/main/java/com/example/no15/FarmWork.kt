@@ -36,18 +36,16 @@ class FarmWork : AppCompatActivity() {
             val b = it.getString("muckname")
             val c = it.getString("count")
             val d = it.getString("counttype")
-            A = a
-            B = b
-            C = c
-            D = d
-        }
-        intent?.extras?.let {
             val e = it.getString("who")
             val f = it.getString("name")
             val g = it.getString("use")
             val h = it.getString("multiple")
             val i = it.getString("other")
             val j = it.getString("number")
+            A = a
+            B = b
+            C = c
+            D = d
             E = e
             F = f
             G = g
@@ -65,12 +63,13 @@ class FarmWork : AppCompatActivity() {
         val multiple = H
         val other = I
         val number = J
+
+
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
 
-
-        button_Farmwork_add.setOnClickListener {
-            Toast.makeText(this,"${mucktypeselect}${number}",Toast.LENGTH_SHORT).show()
-        }
+//        button_Farmwork_add.setOnClickListener {     //debug用
+//            Toast.makeText(this,"${mucktypeselect}${number}",Toast.LENGTH_SHORT).show()
+//        }
 
         val code = arrayListOf("A","B","C","D","E","F")       //田區代號
         val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,code)
@@ -95,51 +94,69 @@ class FarmWork : AppCompatActivity() {
 
 
         button_to_muck.setOnClickListener{
-            startActivity(Intent(this,MuckWork::class.java))       //肥料使用紀錄按鈕
+            val bundle = Bundle()
+            bundle.putString("who","${who}")
+            bundle.putString("name","${name}")
+            bundle.putString("number","${number}")
+            bundle.putString("use","${use}")
+            bundle.putString("multiple","${multiple}")
+            bundle.putString("other","${other}")
+            val intent = Intent(this,MuckWork::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+//            startActivity(Intent(this,MuckWork::class.java))       //肥料使用紀錄按鈕
         }
         button_to_worm.setOnClickListener{
-            startActivity(Intent(this,WormWork::class.java))       //防治使用紀錄按鈕
+            val bundle = Bundle()
+            bundle.putString("mucktype","${mucktypeselect}")
+            bundle.putString("muckname","${muckname}")
+            bundle.putString("count","${count}")
+            bundle.putString("counttype","${counttype}")
+            val intent = Intent(this,WormWork::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+//            startActivity(Intent(this,WormWork::class.java))       //防治使用紀錄按鈕
         }
 
-//        button_Farmwork_add.setOnClickListener {                      //新增資料
-//            if (editText_Crop.length()<1 || editText_Date.length()<1 || editText_Work.length()<1){
-//                Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
-//            }else {
-//                try {
-//                    dbrw.execSQL(
-//                        "INSERT INTO FarmWorkDB(crop,date,code,number,work,tips," +
-//                                "mucktype,muckname,muckcount,muckcounttype," +
-//                                "wormwho,wormname,wormnumber,wormuse,wormmultiple,wormother) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-//                        arrayOf(
-//                            editText_Crop.text.toString(),  //0  農作物
-//                            editText_Date.text.toString(),  //1  日期
-//                            spinner_Code.selectedItem.toString(),  //2  田區
-//                            spinner_Number.selectedItem.toString(),  //3 號碼
-//                            editText_Work.text.toString(),  //4  工作
-//                            editText_Tips.text.toString(),  //5  備註
-//                            mucktypeselect.toString(),  //6  mucktype
-//                            muckname.toString(),  //7  muckname
-//                            count.toString(),  //8  muckcount
-//                            counttype.toString(),  //9  muckcounttype
-//                            who.toString(),  //10  wormwho
-//                            name.toString(),  //11  wormname
-//                            number.toString(),//12  wormnumber
-//                            use.toString(),  //13 wormuse
-//                            multiple.toString(),  //14  wormmultiple
-//                            other.toString()      //15  wormother
-//                        )
-//                    )
-//                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
-//                } catch (e: Exception) {
-//                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
-//                }
-//                startActivity(Intent(this, FarmworkData::class.java))
-//                editText_Crop.setText("")
-//                editText_Date.setText("")
-//                editText_Work.setText("")
-//                editText_Tips.setText("")
-//            }
-//        }
+        button_Farmwork_add.setOnClickListener {                      //新增資料
+            if (editText_Crop.length()<1 || editText_Date.length()<1 || editText_Work.length()<1){
+                Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
+            }else {
+                try {
+                    dbrw.execSQL(
+                        "INSERT INTO FarmWorkDB(crop,date,code,number,work,tips," +
+                                "mucktype,muckname,muckcount,muckcounttype," +
+                                "wormwho,wormname,wormnumber,wormuse,wormmultiple,wormother) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                        arrayOf(
+                            editText_Crop.text.toString(),  //0  農作物
+                            editText_Date.text.toString(),  //1  日期
+                            spinner_Code.selectedItem.toString(),  //2  田區
+                            spinner_Number.selectedItem.toString(),  //3 號碼
+                            editText_Work.text.toString(),  //4  工作
+                            editText_Tips.text.toString(),  //5  備註
+                            mucktypeselect.toString(),  //6  mucktype
+                            muckname.toString(),  //7  muckname
+                            count.toString(),  //8  muckcount
+                            counttype.toString(),  //9  muckcounttype
+                            who.toString(),  //10  wormwho
+                            name.toString(),  //11  wormname
+                            number.toString(),//12  wormnumber
+                            use.toString(),  //13 wormuse
+                            multiple.toString(),  //14  wormmultiple
+                            other.toString()      //15  wormother
+                        )
+                    )
+                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                }
+                startActivity(Intent(this, FarmworkData::class.java))
+                editText_Crop.setText("")
+                editText_Date.setText("")
+                editText_Work.setText("")
+                editText_Tips.setText("")
+            }
+        }
 
     }
 
