@@ -167,7 +167,6 @@ class FarmWork : AppCompatActivity() {
     }
 
 
-
     override fun onBackPressed() {    //上一頁
         AlertDialog.Builder(this)    //會跳一個提示框
             .setTitle("捨棄")
@@ -180,13 +179,6 @@ class FarmWork : AppCompatActivity() {
                 startActivity(Intent(this, FarmworkData::class.java)) //案箭頭回上一頁
             }.show()
     }
-
-
-
-    private fun addListener() {         //新增資料
-
-    }
-
 
 
     private fun A(){                             //選到A時的函式
@@ -237,13 +229,5 @@ class FarmWork : AppCompatActivity() {
         }
     }
 
-//    private val resultLauncher =
-//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-//            if (RESULT_OK == activityResult.resultCode) {
-//                Log.d(
-//                    "maho",
-//                    "回傳: ${activityResult.data?.getStringExtra(it.mucktype)}"
-//                )
-//            }
 
 }

@@ -9,6 +9,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.No15">
         <activity
+            android:name=".worm_work_edit"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".muck_work_edit"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".farm_work_edit"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
             android:name=".farm_alert"
             android:exported="false"
             android:theme="@android:style/Theme.Holo.Dialog" />

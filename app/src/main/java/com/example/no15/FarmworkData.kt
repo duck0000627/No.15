@@ -4,6 +4,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -88,9 +89,10 @@ class FarmworkData : AppCompatActivity() {
             var code = ""
             var number = ""
             var tips = ""
+            var id = ""
 //            var data = arrayOf("date","crop","work","code","number","tips")
-            val click = l
-            val search = "SELECT * FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'"
+            val click = l+1
+            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"           //get跟listview同位置的資料
             val c = dbrw.rawQuery(search, null)
             c.moveToFirst()
             for (i in 0 until c.count) {
@@ -100,6 +102,7 @@ class FarmworkData : AppCompatActivity() {
                 code = "${c.getString(2)}"
                 number = "${c.getString(3)}"
                 tips = "${c.getString(5)}"
+                id = "${c.getInt(0)}"
                 c.moveToNext()
             }
 
@@ -130,7 +133,7 @@ class FarmworkData : AppCompatActivity() {
                             .setMessage("確定刪除紀錄內容?")
                             .setPositiveButton("確定") { dialog, which ->
                                 try {
-//                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
+//                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid) LIKE '${click}'")
 //                                    Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
 //                                    adapter.notifyDataSetChanged()
 //                                    startActivity(Intent(this, FarmworkData::class.java))
@@ -152,10 +155,12 @@ class FarmworkData : AppCompatActivity() {
                 }
                 .setNegativeButton("編輯") { dialog, which ->
                     try {
-//                        dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
+                        val search = click
+                        Log.d("dddddddd","${search}")
+                        val intent = Intent(this,farm_work_edit::class.java)
+                        intent.putExtra("id","${search}")
+                        startActivity(intent)
                         Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
-//                        adapter.notifyDataSetChanged()
-//                        startActivity(Intent(this, FarmworkData::class.java))
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }

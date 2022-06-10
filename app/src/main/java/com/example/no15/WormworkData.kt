@@ -137,11 +137,13 @@ class WormworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
+            if (c.getString(8).length > 0){
             items.add("日期:${c.getString(1)}\n" +
                     "${c.getString(2)}${c.getString(3)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(11)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(12)}\n" +
                     "農作物:\t\t\t\t\t\t\t${c.getString(0)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t防治對象:${c.getString(10)}\n" +
                     "使用量:\t\t\t\t\t\t\t${c.getString(13)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t稀釋倍數:${c.getString(14)}倍\n" +
                     "其他防治方法:${c.getString(15)}")
+                }
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()
