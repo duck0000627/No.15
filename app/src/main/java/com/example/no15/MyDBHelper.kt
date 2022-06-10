@@ -10,7 +10,7 @@ class MyDBHelper(context: Context,
                  version: Int = v):SQLiteOpenHelper(context, name, factory, version) {
                      companion object{
                          private const val database = "FarmWorkDatabase"
-                         private const val v = 7
+                         private const val v = 8
                      }
 
     override fun onCreate(db: SQLiteDatabase) {

@@ -23,6 +23,8 @@ class WormworkData : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wormwork_data)
 
+        LV_wormwork.bringToFront()
+
         dbrw = MyDBHelper(this).writableDatabase
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         LV_wormwork.adapter = adapter
@@ -103,16 +105,16 @@ class WormworkData : AppCompatActivity() {
                 .setMessage("防治對象 :${who}\n資材名稱:\t\t\t${name}\n批號 :${number}\n使用量:\t\t\t${use}倍\n稀釋倍數:\t\t\t${multiple}倍\n其他:\t\t\t${other}")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
-                        dbrw.execSQL("DELETE FROM WormWorkDB WHERE (rowid-1) LIKE '${click}'")
+//                        dbrw.execSQL("DELETE FROM WormWorkDB WHERE (rowid-1) LIKE '${click}'")
                         Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
-                        adapter.notifyDataSetChanged()
-                        startActivity(Intent(this,FarmworkData::class.java))
+//                        adapter.notifyDataSetChanged()
+//                        startActivity(Intent(this,FarmworkData::class.java))
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->
-                    Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
                 }.show()
             adapter.notifyDataSetChanged()
             c.close()
@@ -124,7 +126,7 @@ class WormworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("防治對象:${c.getString(0)}名稱:${c.getString(1)}批號:${c.getString(2)}使用量:${c.getString(3)}稀釋倍數:${c.getString(4)}其他稀釋方法:${c.getString(5)}")
+            items.add("名稱:${c.getString(1)}\t\t\t批號:${c.getString(2)}\n防治對象:${c.getString(0)}\n使用量:${c.getString(3)}稀釋倍數:${c.getString(4)}\n其他防治方法:${c.getString(5)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()

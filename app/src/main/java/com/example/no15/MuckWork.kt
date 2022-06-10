@@ -35,6 +35,7 @@ class MuckWork : AppCompatActivity() {
                 }.show()
         }
 
+
         ArrayAdapter.createFromResource(this,R.array.use_number,android.R.layout.simple_spinner_item).also { adapter ->     //使用量下拉框
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner_UseNumber.adapter = adapter
@@ -66,10 +67,13 @@ class MuckWork : AppCompatActivity() {
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
-                    dbrw.execSQL(
-                        "INSERT INTO MuckWorkDB(type,muckname,count,counttype) VALUES(?,?,?,?)",
+                    val mucktype = when{               //讀radiobutton的字
+                        rdb_basic.isChecked -> "基肥"
+                        else -> "追肥"
+                    }
+                    dbrw.execSQL("INSERT INTO MuckWorkDB(type,muckname,count,counttype) VALUES(?,?,?,?)",
                         arrayOf(
-                            (RG_muck.checkedRadioButtonId).toString(),
+                            mucktype,
                             editText_MuckName.text.toString(),
                             editText_UseNumber.text.toString(),
                             spinner_UseNumber.selectedItem.toString()

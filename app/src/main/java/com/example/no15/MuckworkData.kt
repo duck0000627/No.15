@@ -25,6 +25,7 @@ class MuckworkData : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_muckwork_data)
 
+        LV_muckwork.bringToFront()
 
         dbrw = MyDBHelper(this).writableDatabase  //呼叫資料庫
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
@@ -94,23 +95,23 @@ class MuckworkData : AppCompatActivity() {
                 c.moveToNext()
             }
 
-            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
 //            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
             AlertDialog.Builder(this)
                 .setTitle("施肥別 :${type}")
                 .setMessage("名稱 :${muckname}\n使用量 :\t\t\t${count}${counttype}")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
-                        dbrw.execSQL("DELETE FROM MuckWorkDB WHERE (rowid-1) LIKE '${click}'")
+//                        dbrw.execSQL("DELETE FROM MuckWorkDB WHERE (rowid-1) LIKE '${click}'")
                         Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
-                        adapter.notifyDataSetChanged()
-                        startActivity(Intent(this,FarmworkData::class.java))
+//                        adapter.notifyDataSetChanged()
+//                        startActivity(Intent(this,FarmworkData::class.java))
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->
-                    Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
                 }.show()
             adapter.notifyDataSetChanged()
             c.close()
@@ -122,7 +123,7 @@ class MuckworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("名稱:${c.getString(1)}\n施肥別 :${c.getString(0)}使用量:${c.getString(2)}${c.getString(3)}")
+            items.add("名稱:${c.getString(1)}\n施肥別 :${c.getString(0)}\t\t\t使用量:${c.getString(2)}${c.getString(3)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()

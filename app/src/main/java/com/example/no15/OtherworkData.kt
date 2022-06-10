@@ -23,6 +23,8 @@ class OtherworkData : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otherwork_data)
 
+        LV_otherwork.bringToFront()
+
         dbrw = MyDBHelper(this).writableDatabase
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         LV_otherwork.adapter = adapter
@@ -98,16 +100,16 @@ class OtherworkData : AppCompatActivity() {
                 .setMessage("內容 :${text}13")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
-                        dbrw.execSQL("DELETE FROM OtherWorkDB WHERE (rowid-1) LIKE '${click}'")
+//                        dbrw.execSQL("DELETE FROM OtherWorkDB WHERE (rowid-1) LIKE '${click}'")
                         Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
-                        adapter.notifyDataSetChanged()
-                        startActivity(Intent(this,FarmworkData::class.java))
+//                        adapter.notifyDataSetChanged()
+//                        startActivity(Intent(this,FarmworkData::class.java))
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->
-                    Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
                 }.show()
             adapter.notifyDataSetChanged()
             c.close()

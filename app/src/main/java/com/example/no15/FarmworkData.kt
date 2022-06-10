@@ -12,6 +12,7 @@ import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_farmwork_data.*
 import kotlinx.android.synthetic.main.activity_farmwork_data.layout_drawer
 import kotlinx.android.synthetic.main.activity_farmwork_data.navigation_drawer
+import kotlinx.android.synthetic.main.activity_muckwork_data.*
 
 
 class FarmworkData : AppCompatActivity() {
@@ -23,6 +24,8 @@ class FarmworkData : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farmwork_data)
+
+        LV_farmwork.bringToFront()
 
         Stetho.initializeWithDefaults(this)     //看資料庫的套件程式
 
@@ -54,8 +57,9 @@ class FarmworkData : AppCompatActivity() {
                 }
                 R.id.drawer_muck -> {          //肥料按鈕被點選
                     startActivity(Intent(this, MuckworkData::class.java))
-                    layout_drawer.closeDrawer(navigation_drawer)
 //                    LV_muckwork.bringToFront()
+                    layout_drawer.closeDrawer(navigation_drawer)
+//
                 }
                 R.id.drawer_worm -> {          //病蟲害按鈕被點選
                     startActivity(Intent(this, WormworkData::class.java))
@@ -101,17 +105,17 @@ class FarmworkData : AppCompatActivity() {
 
             Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
 
-            val view =  if (work == "防病蟲害") {       //根據點開的顯示alert的圖片
+            val view = if (work == "防病蟲害") {       //根據點開的顯示alert的圖片
                 LayoutInflater.from(this).inflate(R.layout.activity_worm_alert, null)
             } else if (work == "除草") {
                 LayoutInflater.from(this).inflate(R.layout.grass_alert, null)
-            } else if (work == "施肥"){
+            } else if (work == "施肥") {
                 LayoutInflater.from(this).inflate(R.layout.muck_alert, null)
-            } else if (work == "灌溉"){
+            } else if (work == "灌溉") {
                 LayoutInflater.from(this).inflate(R.layout.water_alert, null)
-            } else if (work == "播種"){
+            } else if (work == "播種") {
                 LayoutInflater.from(this).inflate(R.layout.seed_alert, null)
-            } else{
+            } else {
                 LayoutInflater.from(this).inflate(R.layout.land_alert, null)
             }
 
@@ -121,20 +125,37 @@ class FarmworkData : AppCompatActivity() {
                 .setMessage("${work}\n田區:\t\t\t${code}${number}\n備註:\t\t\t${tips}")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
-                        dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
-                        Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
-                        adapter.notifyDataSetChanged()
-                        startActivity(Intent(this, FarmworkData::class.java))
+                        AlertDialog.Builder(this)
+                            .setTitle("刪除")
+                            .setMessage("確定刪除紀錄內容?")
+                            .setPositiveButton("確定") { dialog, which ->
+                                try {
+//                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
+//                                    Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
+//                                    adapter.notifyDataSetChanged()
+//                                    startActivity(Intent(this, FarmworkData::class.java))
+                                } catch (e: Exception) {
+                                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            .setNegativeButton("取消") { dialog, which ->
+                                try {
+
+                                } catch (e: Exception) {
+
+                                }
+                            }
+
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->
                     try {
-                        dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
-                        Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
-                        adapter.notifyDataSetChanged()
-                        startActivity(Intent(this, FarmworkData::class.java))
+//                        dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'")
+                        Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
+//                        adapter.notifyDataSetChanged()
+//                        startActivity(Intent(this, FarmworkData::class.java))
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
@@ -151,7 +172,9 @@ class FarmworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count) {
-            items.add("日期:${c.getString(1)}\t\t\t工作項目 :${c.getString(4)}田區代號:${c.getString(2)}${c.getString(3)}")
+            items.add(
+                "${c.getString(1)}\t\t\t${c.getString(4)}\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}\t\t\t\t${c.getString(5)}"
+            )
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()
