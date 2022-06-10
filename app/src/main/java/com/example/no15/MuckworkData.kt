@@ -4,6 +4,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -51,21 +52,17 @@ class MuckworkData : AppCompatActivity() {
                 R.id.drawer_farmwork -> {      //農場工作按鈕被點選
                     startActivity(Intent(this,FarmworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)   //收側邊框
-//                    LV_farmwork.bringToFront()
                 }
                 R.id.drawer_muck -> {          //肥料按鈕被點選
                     layout_drawer.closeDrawer(navigation_drawer)
-//                    LV_muckwork.bringToFront()
                 }
                 R.id.drawer_worm -> {          //病蟲害按鈕被點選
                     startActivity(Intent(this,WormworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)
-//                    LV_wormwork.bringToFront()
                 }
                 R.id.drawer_other -> {         //其他按鈕被點選
                     startActivity(Intent(this,OtherworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)
-//                    LV_otherwork.bringToFront()
                 }
                 R.id.drawer_logout -> {      //登出
                     startActivity(Intent(this,MainActivity::class.java))
@@ -87,8 +84,8 @@ class MuckworkData : AppCompatActivity() {
             var number = ""
             var crop = ""
 //            var data = arrayOf("date","crop","work","code","number","tips")
-            val click = l
-            val search = "SELECT * FROM FarmWorkDB WHERE (rowid-1) LIKE '${click}'"
+            val click = l+1
+            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"
             val c = dbrw.rawQuery(search, null)
             c.moveToFirst()
             for (i in 0 until c.count) {
@@ -103,8 +100,6 @@ class MuckworkData : AppCompatActivity() {
                 c.moveToNext()
             }
 
-//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
-//            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
             AlertDialog.Builder(this)
                 .setTitle("${date}")
                 .setMessage("田區:${code}${number}\n" +
@@ -123,7 +118,16 @@ class MuckworkData : AppCompatActivity() {
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->
-                    Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
+                    try {
+                        val search = click
+                        Log.d("dddddddd","${search}")
+                        val intent = Intent(this,muck_work_edit::class.java)
+                        intent.putExtra("id","${search}")
+                        startActivity(intent)
+                        Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                    }
                 }.show()
             adapter.notifyDataSetChanged()
             c.close()
@@ -135,11 +139,11 @@ class MuckworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            if (c.getString(8).length > 0){
+//            if (c.getString(8).length > 0){
                 items.add("${c.getString(1)}\n" +
                         "${c.getString(2)}${c.getString(3)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(7)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(6)}\n" +
                         "農作物:\t\t\t\t\t\t\t\t\t${c.getString(0)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t使用量:${c.getString(8)}${c.getString(9)}")
-            }
+//            }
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()

@@ -54,23 +54,19 @@ class FarmworkData : AppCompatActivity() {
             when (it.itemId) {
                 R.id.drawer_farmwork -> {      //農場工作按鈕被點選
                     layout_drawer.closeDrawer(navigation_drawer)   //收側邊框
-//                    LV_farmwork.bringToFront()
                 }
                 R.id.drawer_muck -> {          //肥料按鈕被點選
                     startActivity(Intent(this, MuckworkData::class.java))
-//                    LV_muckwork.bringToFront()
                     layout_drawer.closeDrawer(navigation_drawer)
 //
                 }
                 R.id.drawer_worm -> {          //病蟲害按鈕被點選
                     startActivity(Intent(this, WormworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)
-//                    LV_wormwork.bringToFront()
                 }
                 R.id.drawer_other -> {         //其他按鈕被點選a
                     startActivity(Intent(this, OtherworkData::class.java))
                     layout_drawer.closeDrawer(navigation_drawer)
-//                    LV_otherwork.bringToFront()
                 }
                 R.id.drawer_logout -> {      //登出
                     startActivity(Intent(this, MainActivity::class.java))
@@ -89,8 +85,6 @@ class FarmworkData : AppCompatActivity() {
             var code = ""
             var number = ""
             var tips = ""
-            var id = ""
-//            var data = arrayOf("date","crop","work","code","number","tips")
             val click = l+1
             val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"           //get跟listview同位置的資料
             val c = dbrw.rawQuery(search, null)
@@ -102,11 +96,9 @@ class FarmworkData : AppCompatActivity() {
                 code = "${c.getString(2)}"
                 number = "${c.getString(3)}"
                 tips = "${c.getString(5)}"
-                id = "${c.getInt(0)}"
                 c.moveToNext()
             }
 
-//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
 
             val view = if (work == "防病蟲害") {       //根據點開的顯示alert的圖片
                 LayoutInflater.from(this).inflate(R.layout.activity_worm_alert, null)
