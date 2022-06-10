@@ -145,7 +145,7 @@ class FarmworkData : AppCompatActivity() {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
-                .setNegativeButton("編輯") { dialog, which ->
+                .setNegativeButton("編輯") { dialog, which ->      //編輯
                     try {
                         val search = click
                         Log.d("dddddddd","${search}")

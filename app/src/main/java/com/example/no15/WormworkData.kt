@@ -4,6 +4,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -45,22 +46,18 @@ class WormworkData : AppCompatActivity() {
                 R.id.drawer_farmwork -> {      //農場工作按鈕被點選
                     startActivity(Intent(this,FarmworkData::class.java))
                     layout_drawer_Wormwork.closeDrawer(navigation_drawer_Wormwork)   //收側邊框
-//                    LV_farmwork.bringToFront()
                 }
                 R.id.drawer_muck -> {          //肥料按鈕被點選
                     startActivity(Intent(this,MuckworkData::class.java))
                     layout_drawer_Wormwork.closeDrawer(navigation_drawer_Wormwork)
-//                    LV_muckwork.bringToFront()
                 }
                 R.id.drawer_worm -> {          //病蟲害按鈕被點選
                     startActivity(Intent(this,WormworkData::class.java))
                     layout_drawer_Wormwork.closeDrawer(navigation_drawer_Wormwork)
-//                    LV_wormwork.bringToFront()
                 }
                 R.id.drawer_other -> {         //其他按鈕被點選
                     startActivity(Intent(this,OtherworkData::class.java))
                     layout_drawer_Wormwork.closeDrawer(navigation_drawer_Wormwork)
-//                    LV_otherwork.bringToFront()
                 }
                 R.id.drawer_logout -> {      //登出
                     startActivity(Intent(this,MainActivity::class.java))
@@ -83,9 +80,8 @@ class WormworkData : AppCompatActivity() {
             var date = ""
             var code = ""
             var crop = ""
-//            var data = arrayOf("date","crop","work","code","number","tips")
-            val click = l
-            val search = "SELECT * FROM WormWorkDB WHERE (rowid-1) LIKE '${click}'"
+            val click = l+1
+            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"
             val c = dbrw.rawQuery(search, null)
             c.moveToFirst()
             for (i in 0 until c.count) {
@@ -102,9 +98,7 @@ class WormworkData : AppCompatActivity() {
                 c.moveToNext()
             }
 
-//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
-//            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
-            AlertDialog.Builder(this)
+            AlertDialog.Builder(this)       //小框框
                 .setTitle("${date}")
                 .setMessage("田區:${code}${farmnumber}\n" +
                         "農作物:${crop}" +
@@ -124,7 +118,12 @@ class WormworkData : AppCompatActivity() {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
-                .setNegativeButton("編輯") { dialog, which ->
+                .setNegativeButton("編輯") { dialog, which ->        //編輯
+                    val search = click
+                    Log.d("dddddddd","${search}")
+                    val intent = Intent(this,worm_work_edit::class.java)
+                    intent.putExtra("id","${search}")
+                    startActivity(intent)
                     Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
                 }.show()
             adapter.notifyDataSetChanged()

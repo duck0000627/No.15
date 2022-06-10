@@ -44,7 +44,6 @@ class farm_work_edit : AppCompatActivity() {
             farmcode = "${c.getString(2)}"
             number = "${c.getString(3)}"
             tips = "${c.getString(5)}"
-            id = "${c.getInt(0)}"
             c.moveToNext()
         }
         Log.d("dddddddd","${farmid}")
