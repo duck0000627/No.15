@@ -13,8 +13,6 @@ import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_farmwork_data.*
 import kotlinx.android.synthetic.main.activity_farmwork_data.layout_drawer
 import kotlinx.android.synthetic.main.activity_farmwork_data.navigation_drawer
-import kotlinx.android.synthetic.main.activity_muckwork_data.*
-
 
 class FarmworkData : AppCompatActivity() {
 

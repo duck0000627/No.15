@@ -1,15 +1,11 @@
 package com.example.no15
 
-import android.app.Activity
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work.*
 
@@ -67,10 +63,6 @@ class FarmWork : AppCompatActivity() {
 
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
 
-//        button_Farmwork_add.setOnClickListener {     //debug用
-//            Toast.makeText(this,"${mucktypeselect}${number}",Toast.LENGTH_SHORT).show()
-//        }
-
         val code = arrayListOf("A","B","C","D","E","F")       //田區代號
         val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,code)
         spinner_Code.adapter = arrayAdapter
@@ -93,7 +85,7 @@ class FarmWork : AppCompatActivity() {
         }
 
 
-        button_to_muck.setOnClickListener{
+        button_to_muck.setOnClickListener{                 //肥料使用紀錄按鈕
             val bundle = Bundle()
             bundle.putString("who","${who}")
             bundle.putString("name","${name}")
@@ -104,9 +96,8 @@ class FarmWork : AppCompatActivity() {
             val intent = Intent(this,MuckWork::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
-//            startActivity(Intent(this,MuckWork::class.java))       //肥料使用紀錄按鈕
         }
-        button_to_worm.setOnClickListener{
+        button_to_worm.setOnClickListener{                    //防治使用紀錄按鈕
             val bundle = Bundle()
             bundle.putString("mucktype","${mucktypeselect}")
             bundle.putString("muckname","${muckname}")
@@ -115,10 +106,9 @@ class FarmWork : AppCompatActivity() {
             val intent = Intent(this,WormWork::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
-//            startActivity(Intent(this,WormWork::class.java))       //防治使用紀錄按鈕
         }
 
-        button_Farmwork_add.setOnClickListener {                      //新增資料
+        button_Farmwork_add.setOnClickListener {                                                             //新增資料
             if (editText_Crop.length()<1 || editText_Date.length()<1 || editText_Work.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {

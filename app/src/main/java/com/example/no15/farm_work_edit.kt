@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_farm_work.*
 import kotlinx.android.synthetic.main.activity_farm_work_edit.*
 
 class farm_work_edit : AppCompatActivity() {
@@ -32,8 +31,6 @@ class farm_work_edit : AppCompatActivity() {
         var date = ""
         var crop = ""
         var work = ""
-        var farmcode = ""
-        var number = ""
         var tips = ""
         val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB WHERE rowid LIKE '${farmid}'", null)
         c.moveToFirst()
@@ -41,8 +38,6 @@ class farm_work_edit : AppCompatActivity() {
             date = "${c.getString(1)}"
             crop = "${c.getString(0)}"
             work = "${c.getString(4)}"
-            farmcode = "${c.getString(2)}"
-            number = "${c.getString(3)}"
             tips = "${c.getString(5)}"
             c.moveToNext()
         }
