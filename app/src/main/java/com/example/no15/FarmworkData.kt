@@ -74,7 +74,21 @@ class FarmworkData : AppCompatActivity() {
             return@setNavigationItemSelectedListener true
         }
 
-        show()
+//        show()
+
+        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
+        c.moveToFirst()
+        items.clear()
+        for (i in 0 until c.count) {
+            items.add(
+                "\t\t\t\t${c.getString(1)}" +
+                        "\t\t\t\t\t\t\t\t${c.getString(4)}" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}" +
+                        "\t\t\t\t\t\t\t\t\t\t\t${c.getString(5)}"
+            )
+            c.moveToNext()
+        }
+        adapter.notifyDataSetChanged()
 
         LV_farmwork.setOnItemClickListener { adapterView, view, i, l ->     //點擊顯示
             var date = ""
@@ -84,9 +98,10 @@ class FarmworkData : AppCompatActivity() {
             var number = ""
             var tips = ""
             val click = l+1
-            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"           //get跟listview同位置的資料
+            val search = "SELECT * FROM FarmWorkDB WHERE rowid = '${click}'"           //get跟listview同位置的資料
             val c = dbrw.rawQuery(search, null)
             c.moveToFirst()
+            Toast.makeText(this,"${c}",Toast.LENGTH_SHORT).show()
             for (i in 0 until c.count) {
                 date = "${c.getString(1)}"
                 crop = "${c.getString(0)}"
@@ -123,8 +138,10 @@ class FarmworkData : AppCompatActivity() {
                             .setMessage("確定刪除紀錄內容?")
                             .setPositiveButton("確定") { dialog, which ->
                                 try {
-//                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE (rowid) LIKE '${click}'")
+//                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE id LIKE '${click}'")
 //                                    Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
+//                                    val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
+//                                    c.moveToFirst()
 //                                    adapter.notifyDataSetChanged()
 //                                    startActivity(Intent(this, FarmworkData::class.java))
                                 } catch (e: Exception) {
@@ -137,7 +154,7 @@ class FarmworkData : AppCompatActivity() {
                                 } catch (e: Exception) {
 
                                 }
-                            }
+                            }.show()
 
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
@@ -163,19 +180,7 @@ class FarmworkData : AppCompatActivity() {
 
 
     private fun show() {
-        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
-        c.moveToFirst()
-        items.clear()
-        for (i in 0 until c.count) {
-            items.add(
-                "\t\t\t\t${c.getString(1)}" +
-                        "\t\t\t\t\t\t\t\t${c.getString(4)}" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}" +
-                        "\t\t\t\t\t\t\t\t\t\t\t${c.getString(5)}"
-            )
-            c.moveToNext()
-        }
-        adapter.notifyDataSetChanged()
+
     }
 
 
