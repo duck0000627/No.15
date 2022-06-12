@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work.*
+import kotlinx.android.synthetic.main.activity_farm_work_edit.*
 
 class FarmWork : AppCompatActivity() {
 
@@ -22,12 +23,18 @@ class FarmWork : AppCompatActivity() {
     private var H:String? = ""
     private var I:String? = ""
     private var J:String? = ""
+    private var Crop:String? = ""
+    private var Date:String? = ""
+    private var Code:String? = ""
+    private var Number:String? = ""
+    private var Work:String? = ""
+    private var Tips:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farm_work)
 
-        intent?.extras?.let {
+        intent?.extras?.let {                       //接收資料
             val a = it.getString("mucktype")
             val b = it.getString("muckname")
             val c = it.getString("count")
@@ -38,6 +45,12 @@ class FarmWork : AppCompatActivity() {
             val h = it.getString("multiple")
             val i = it.getString("other")
             val j = it.getString("number")
+            val crop = it.getString("crop")
+            val date = it.getString("date")
+            val code = it.getString("code")
+            val number = it.getString("number")
+            val work = it.getString("work")
+            val tips = it.getString("tips")
             A = a
             B = b
             C = c
@@ -48,6 +61,12 @@ class FarmWork : AppCompatActivity() {
             H = h
             I = i
             J = j
+            Crop = crop
+            Number = number
+            Date = date
+            Code = code
+            Work = work
+            Tips = tips
         }
         val mucktypeselect = A
         val muckname = B
@@ -59,6 +78,11 @@ class FarmWork : AppCompatActivity() {
         val multiple = H
         val other = I
         val number = J
+
+        editText_Crop.setText("${Crop}")
+        editText_Date.setText("${Date}")
+        editText_Work.setText("${Work}")
+        editText_Tips.setText("${Tips}")
 
 
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
@@ -93,6 +117,12 @@ class FarmWork : AppCompatActivity() {
             bundle.putString("use","${use}")
             bundle.putString("multiple","${multiple}")
             bundle.putString("other","${other}")
+            bundle.putString("crop","${editText_Crop.text}")
+            bundle.putString("date","${editText_Date.text}")
+            bundle.putString("code","${spinner_Code.selectedItem}")
+            bundle.putString("number","${spinner_Number.selectedItem}")
+            bundle.putString("work","${editText_Work.text}")
+            bundle.putString("tips","${editText_Tips.text}")
             val intent = Intent(this,MuckWork::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
@@ -103,6 +133,12 @@ class FarmWork : AppCompatActivity() {
             bundle.putString("muckname","${muckname}")
             bundle.putString("count","${count}")
             bundle.putString("counttype","${counttype}")
+            bundle.putString("crop","${editText_Crop.text}")
+            bundle.putString("date","${editText_Date.text}")
+            bundle.putString("code","${spinner_Code.selectedItem}")
+            bundle.putString("number","${spinner_Number.selectedItem}")
+            bundle.putString("work","${editText_Work.text}")
+            bundle.putString("tips","${editText_Tips.text}")
             val intent = Intent(this,WormWork::class.java)
             intent.putExtras(bundle)
             startActivity(intent)

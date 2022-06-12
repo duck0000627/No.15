@@ -21,13 +21,18 @@ class MuckWork : AppCompatActivity() {
     private var muckname:String = ""
     private var count:String = ""
     private var counttype:String = ""
-
     private var E:String? = ""
     private var F:String? = ""
     private var G:String? = ""
     private var H:String? = ""
     private var I:String? = ""
     private var J:String? = ""
+    private var Crop:String? = ""
+    private var Date:String? = ""
+    private var Code:String? = ""
+    private var Number:String? = ""
+    private var Work:String? = ""
+    private var Tips:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +45,24 @@ class MuckWork : AppCompatActivity() {
             val h = it.getString("multiple")
             val i = it.getString("other")
             val j = it.getString("number")
+            val crop = it.getString("crop")
+            val date = it.getString("date")
+            val code = it.getString("code")
+            val number = it.getString("number")
+            val work = it.getString("work")
+            val tips = it.getString("tips")
             E = e
             F = f
             G = g
             H = h
             I = i
             J = j
+            Crop = crop
+            Number = number
+            Date = date
+            Code = code
+            Work = work
+            Tips = tips
         }
 
         ArrayAdapter.createFromResource(this,R.array.use_number,android.R.layout.simple_spinner_item).also { adapter ->     //使用量下拉框
@@ -67,7 +84,7 @@ class MuckWork : AppCompatActivity() {
                     muckname = editText_MuckName.text.toString()
                     count = editText_UseNumber.text.toString()
                     counttype = spinner_UseNumber.selectedItem.toString()
-                    val bundle = Bundle()
+                    val bundle = Bundle()                           //帶資料
                     bundle.putString("mucktype","${mucktypeselect}")
                     bundle.putString("muckname","${muckname}")
                     bundle.putString("count","${count}")
@@ -78,6 +95,12 @@ class MuckWork : AppCompatActivity() {
                     bundle.putString("use","${H}")
                     bundle.putString("multiple","${I}")
                     bundle.putString("other","${J}")
+                    bundle.putString("crop","${Crop}")
+                    bundle.putString("code","${Code}")
+                    bundle.putString("number","${Number}")
+                    bundle.putString("tips","${Tips}")
+                    bundle.putString("work","${Work}")
+                    bundle.putString("date","${Date}")
                     val intent = Intent(this,FarmWork::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)
@@ -93,7 +116,7 @@ class MuckWork : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed() {                  //返回箭頭
         AlertDialog.Builder(this)    //會跳一個提示框
                 .setTitle("捨棄")
                 .setMessage("確定捨棄紀錄內容?")
@@ -102,7 +125,16 @@ class MuckWork : AppCompatActivity() {
                     Toast.makeText(this,"取消", Toast.LENGTH_SHORT).show()
                 }
                 .setPositiveButton("捨棄") {dialog,which ->
-                    startActivity(Intent(this, FarmWork::class.java)) //案箭頭回上一頁
+                    val bundle = Bundle()                           //帶資料
+                    bundle.putString("crop","${Crop}")
+                    bundle.putString("code","${Code}")
+                    bundle.putString("number","${Number}")
+                    bundle.putString("tips","${Tips}")
+                    bundle.putString("work","${Work}")
+                    bundle.putString("date","${Date}")
+                    val intent = Intent(this,FarmWork::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
                 }.show()
     }
 

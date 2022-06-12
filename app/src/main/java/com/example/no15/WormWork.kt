@@ -25,6 +25,12 @@ class WormWork : AppCompatActivity() {
     private var B:String? = ""
     private var C:String? = ""
     private var D:String? = ""
+    private var Crop:String? = ""
+    private var Date:String? = ""
+    private var Code:String? = ""
+    private var Number:String? = ""
+    private var Work:String? = ""
+    private var Tips:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +41,22 @@ class WormWork : AppCompatActivity() {
             val b = it.getString("muckname")
             val c = it.getString("count")
             val d = it.getString("counttype")
+            val crop = it.getString("crop")
+            val date = it.getString("date")
+            val code = it.getString("code")
+            val number = it.getString("number")
+            val work = it.getString("work")
+            val tips = it.getString("tips")
             A = a
             B = b
             C = c
             D = d
+            Crop = crop
+            Number = number
+            Date = date
+            Code = code
+            Work = work
+            Tips = tips
         }
 
 
@@ -88,6 +106,12 @@ class WormWork : AppCompatActivity() {
                     bundle.putString("muckname","${B}")
                     bundle.putString("count","${C}")
                     bundle.putString("counttype","${D}")
+                    bundle.putString("crop","${Crop}")
+                    bundle.putString("code","${Code}")
+                    bundle.putString("number","${Number}")
+                    bundle.putString("tips","${Tips}")
+                    bundle.putString("work","${Work}")
+                    bundle.putString("date","${Date}")
                     val intent = Intent(this,FarmWork::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)
@@ -112,7 +136,7 @@ class WormWork : AppCompatActivity() {
         super.onDestroy()
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed() {                  //返回箭頭
         AlertDialog.Builder(this)    //會跳一個提示框
             .setTitle("捨棄")
             .setMessage("確定捨棄紀錄內容?")
@@ -121,7 +145,16 @@ class WormWork : AppCompatActivity() {
                 Toast.makeText(this,"取消", Toast.LENGTH_SHORT).show()
             }
             .setPositiveButton("捨棄") {dialog,which ->
-                startActivity(Intent(this, FarmWork::class.java)) //案箭頭回上一頁
+                val bundle = Bundle()                           //帶資料
+                bundle.putString("crop","${Crop}")
+                bundle.putString("code","${Code}")
+                bundle.putString("number","${Number}")
+                bundle.putString("tips","${Tips}")
+                bundle.putString("work","${Work}")
+                bundle.putString("date","${Date}")
+                val intent = Intent(this,FarmWork::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent)
             }.show()
     }
 }
