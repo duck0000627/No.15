@@ -64,15 +64,6 @@ class MuckWork : AppCompatActivity() {
                         rdb_basic.isChecked -> "基肥"
                         else -> "追肥"
                     }
-//                    dbrw.execSQL("INSERT INTO MuckWorkDB(type,muckname,count,counttype) VALUES(?,?,?,?)",
-//                        arrayOf(
-//                            mucktype,
-//                            editText_MuckName.text.toString(),
-//                            editText_UseNumber.text.toString(),
-//                            spinner_UseNumber.selectedItem.toString()
-//                        )
-//                    )
-                    //data.mucktype = this.mucktypeselect
                     muckname = editText_MuckName.text.toString()
                     count = editText_UseNumber.text.toString()
                     counttype = spinner_UseNumber.selectedItem.toString()

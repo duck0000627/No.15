@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_farm_work_edit.*
 import kotlinx.android.synthetic.main.activity_other_work_edit.*
 
 class other_work_edit : AppCompatActivity() {

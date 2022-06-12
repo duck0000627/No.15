@@ -71,17 +71,6 @@ class WormWork : AppCompatActivity() {
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
-//                    dbrw.execSQL(
-//                        "INSERT INTO WormWorkDB(who,name,number,use,multiple,other) VALUES(?,?,?,?,?,?)",
-//                        arrayOf(
-//                            editText_WormWho.text.toString(),
-//                            editText_WormName.text.toString(),
-//                            editText_WormNumber.text.toString(),
-//                            editText_WormUse.text.toString(),
-//                            editText_WormMultiple.text.toString(),
-//                            editText_WormOther.text.toString()
-//                        )
-//                    )
                     who = editText_WormWho.text.toString()
                     name = editText_WormName.text.toString()
                     number = editText_WormNumber.text.toString()

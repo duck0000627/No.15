@@ -84,17 +84,6 @@ class MuckworkData : AppCompatActivity() {
         show()
 
         LV_muckwork.setOnItemClickListener { adapterView, view, i, l ->
-//            var muckname = ""
-//            var type = ""
-//            var counttype = ""
-//            var count = ""
-//            var date = ""
-//            var code = ""
-//            var number = ""
-//            var crop = ""
-//            var data = arrayOf("date","crop","work","code","number","tips")
-//            val click = l+1
-//            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"
             val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
             c.moveToFirst()
             id_.clear()

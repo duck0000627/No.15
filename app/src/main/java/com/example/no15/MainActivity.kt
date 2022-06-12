@@ -30,47 +30,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun loginalert_boss() {        //老闆登入驗證程式
-//        val item = LayoutInflater.from(this).inflate(R.layout.login_alert, null)
-//
-//        AlertDialog.Builder(this)
-//            .setTitle("請輸入密碼")
-//            .setView(item)
-//            .setPositiveButton("確定"){_,_ ->
-//                val editText = item.password_edidtext as EditText
-//                val password = editText.text.toString()
-//                if (TextUtils.isEmpty(password)){
-//                    Toast.makeText(applicationContext, "請輸入密碼", Toast.LENGTH_SHORT).show()
-//                }else{
-//                    if (password == "123456")     //密碼
-//                        startActivity(Intent(this, DataPage::class.java))      //切換頁面
-//                    else{
-//                        Toast.makeText(this,"密碼錯誤", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//            .show()
-//    }
-
-//    private fun loginalert_imployee() {        //員工登入驗證程式
-//        val item = LayoutInflater.from(this).inflate(R.layout.login_alert, null)
-//
-//        AlertDialog.Builder(this)
-//            .setTitle("請輸入密碼")
-//            .setView(item)
-//            .setPositiveButton("確定"){_,_ ->
-//                val editText = item.password_edidtext as EditText
-//                val password = editText.text.toString()
-//                if (TextUtils.isEmpty(password)){
-//                    Toast.makeText(applicationContext, "請輸入密碼", Toast.LENGTH_SHORT).show()
-//                }else{
-//                    if (password == "888888")      //密碼
-//                        startActivity(Intent(this, DataPage::class.java))      //切換頁面
-//                    else{
-//                        Toast.makeText(this,"密碼錯誤", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//            .show()
-//    }
 }
