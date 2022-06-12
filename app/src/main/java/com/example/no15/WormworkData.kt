@@ -188,9 +188,9 @@ class WormworkData : AppCompatActivity() {
                     "農作物:\t\t\t\t\t\t\t${c.getString(0)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t防治對象:${c.getString(10)}\n" +
                     "使用量:\t\t\t\t\t\t\t${c.getString(13)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t稀釋倍數:${c.getString(14)}倍\n" +
                     "其他防治方法:${c.getString(15)}")
-                }
+//                }
             c.moveToNext()
-//        }
+        }
         adapter.notifyDataSetChanged()
     }
 
