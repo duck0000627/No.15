@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_other_work_edit.*
 
 class other_work_edit : AppCompatActivity() {
@@ -59,5 +60,18 @@ class other_work_edit : AppCompatActivity() {
     override fun onDestroy() {
         dbrw.close()  //關閉資料庫
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {    //上一頁
+        AlertDialog.Builder(this)    //會跳一個提示框
+            .setTitle("捨棄")
+            .setMessage("確定捨棄修改內容?")
+            .setNegativeButton("取消"){
+                    dialog, which->
+                Toast.makeText(this,"取消", Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("捨棄") {dialog,which ->
+                startActivity(Intent(this, OtherworkData::class.java)) //案箭頭回上一頁
+            }.show()
     }
 }

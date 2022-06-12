@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work_edit.*
 import kotlinx.android.synthetic.main.activity_muck_work.*
 import kotlinx.android.synthetic.main.activity_muck_work_edit.*
@@ -82,5 +83,18 @@ class muck_work_edit : AppCompatActivity() {
             }
         }
         c.close()
+    }
+
+    override fun onBackPressed() {    //上一頁
+        AlertDialog.Builder(this)    //會跳一個提示框
+            .setTitle("捨棄")
+            .setMessage("確定捨棄修改內容?")
+            .setNegativeButton("取消"){
+                    dialog, which->
+                Toast.makeText(this,"取消", Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("捨棄") {dialog,which ->
+                startActivity(Intent(this, MuckworkData::class.java)) //案箭頭回上一頁
+            }.show()
     }
 }
