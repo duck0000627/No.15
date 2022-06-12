@@ -32,7 +32,7 @@ class farm_work_edit : AppCompatActivity() {
         var crop = ""
         var work = ""
         var tips = ""
-        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB WHERE rowid LIKE '${farmid}'", null)
+        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB WHERE rowid LIKE '${farmid}'",null)
         c.moveToFirst()
         for (i in 0 until c.count) {
             date = "${c.getString(1)}"
