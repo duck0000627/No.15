@@ -164,7 +164,7 @@ class WormworkData : AppCompatActivity() {
                     try {
 //                        val search = click
                         Log.d("dddddddd", "${id_[i]}")
-                        val intent = Intent(this, farm_work_edit::class.java)
+                        val intent = Intent(this, worm_work_edit::class.java)
                         intent.putExtra("id", "${id_[i]}")
                         startActivity(intent)
                         Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()

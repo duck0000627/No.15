@@ -4,6 +4,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,9 @@ import kotlinx.android.synthetic.main.activity_wormwork_data.*
 class OtherworkData : AppCompatActivity() {
 
     private var items: ArrayList<String> = ArrayList()
+    private var id_: ArrayList<String> = ArrayList()
+    private var text: ArrayList<String> = ArrayList()
+    private var date: ArrayList<String> = ArrayList()
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var dbrw: SQLiteDatabase
 
@@ -47,27 +51,20 @@ class OtherworkData : AppCompatActivity() {
         navigation_drawer_Otherwork.setNavigationItemSelectedListener {          //當側邊框按鈕被點選
             when (it.itemId) {
                 R.id.drawer_farmwork -> {      //農場工作按鈕被點選
-//                    replaceFragement(FarmWork_Data_Fragement())  //切換fragement
                     startActivity(Intent(this,FarmworkData::class.java))
                     layout_drawer_Otherwork.closeDrawer(navigation_drawer_Otherwork)   //收側邊框
-//                    LV_farmwork.bringToFront()
                 }
                 R.id.drawer_muck -> {          //肥料按鈕被點選
-//                    replaceFragement(Muck_Data_Fragment())
                     startActivity(Intent(this,MuckworkData::class.java))
                     layout_drawer_Otherwork.closeDrawer(navigation_drawer_Otherwork)
-//                    LV_muckwork.bringToFront()
                 }
                 R.id.drawer_worm -> {          //病蟲害按鈕被點選
 //                    replaceFragement(Worm_Data_Fragment())
                     startActivity(Intent(this,WormworkData::class.java))
                     layout_drawer_Otherwork.closeDrawer(navigation_drawer_Otherwork)
-//                    LV_wormwork.bringToFront()
                 }
                 R.id.drawer_other -> {         //其他按鈕被點選
-//                    replaceFragement(Other_Data_Fragment())
                     layout_drawer_Otherwork.closeDrawer(navigation_drawer_Otherwork)
-//                    LV_otherwork.bringToFront()
                 }
                 R.id.drawer_logout -> {      //登出
                     startActivity(Intent(this,MainActivity::class.java))
@@ -80,36 +77,59 @@ class OtherworkData : AppCompatActivity() {
         show()
 
         LV_otherwork.setOnItemClickListener { adapterView, view, i, l ->
-            var date = ""
-            var text = ""
-//            var data = arrayOf("date","crop","work","code","number","tips")
-            val click = l
-            val search = "SELECT * FROM OtherWorkDB WHERE (rowid-1) LIKE '${click}'"
-            val c = dbrw.rawQuery(search, null)
+            val c = dbrw.rawQuery("SELECT * FROM OtherWorkDB", null)
             c.moveToFirst()
+            date.clear()
+            text.clear()
+            id_.clear()
             for (i in 0 until c.count) {
-                text = "${c.getString(1)}"
-                date = "${c.getString(0)}"
+                text.add("${c.getString(1)}")
+                date.add("${c.getString(0)}")
+                id_.add("${c.getString(2)}")
                 c.moveToNext()
             }
-
-//            Toast.makeText(this, "${l}", Toast.LENGTH_SHORT).show()
-//            val view = LayoutInflater.from(this).inflate(R.layout.activity_farm_alert,null)
+            Toast.makeText(this, "${id_[i]}", Toast.LENGTH_SHORT).show()
             AlertDialog.Builder(this)
-                .setTitle("日期:${date}")
-                .setMessage("內容 :${text}13")
+                .setTitle("日期:${date[i]}")
+                .setMessage("內容 :${text[i]}")
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
-//                        dbrw.execSQL("DELETE FROM OtherWorkDB WHERE (rowid-1) LIKE '${click}'")
-                        Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
-//                        adapter.notifyDataSetChanged()
-//                        startActivity(Intent(this,FarmworkData::class.java))
+                        AlertDialog.Builder(this)
+                            .setTitle("刪除")                                                          //刪除
+                            .setMessage("確定刪除紀錄內容?")
+                            .setPositiveButton("確定") { dialog, which ->
+                                try {
+                                    dbrw.execSQL("DELETE FROM OtherWorkDB WHERE id_ LIKE '${id_[i]}'")
+                                    Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
+                                    val c = dbrw.rawQuery("SELECT * FROM OtherWorkDB", null)
+                                    c.moveToFirst()
+                                    adapter.notifyDataSetChanged()
+                                    startActivity(Intent(this, OtherworkData::class.java))
+                                } catch (e: Exception) {
+                                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            .setNegativeButton("取消") { dialog, which ->
+                                try {
+                                    Toast.makeText(this, "cancle", Toast.LENGTH_SHORT).show()
+                                } catch (e: Exception) {
+                                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                                }
+                            }.show()
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->
-                    Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
+                    try {
+                        Log.d("dddddddd", "${i}")
+                        val intent = Intent(this, other_work_edit::class.java)
+                        intent.putExtra("id", "${id_[i]}")
+                        startActivity(intent)
+                        Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                    }
                 }.show()
             adapter.notifyDataSetChanged()
             c.close()

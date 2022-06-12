@@ -42,7 +42,7 @@ class muck_work_edit : AppCompatActivity() {
         var code = ""
         var number = ""
         var crop = ""
-        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB WHERE rowid LIKE '${farmid}'", null)
+        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB WHERE id_ LIKE '${farmid}'", null)
         c.moveToFirst()
         c.moveToFirst()
         for (i in 0 until c.count) {
@@ -71,12 +71,12 @@ class muck_work_edit : AppCompatActivity() {
                     }
                     dbrw.execSQL(
                         "UPDATE FarmWorkDB SET mucktype = '${mucktypeselect}',muckname = '${editText_MuckName_edit.text}'," +
-                                "muckcount = '${editText_UseNumber_edit.text}',muckcounttype = '${spinner_UseNumber_edit.selectedItem}'")
+                                "muckcount = '${editText_UseNumber_edit.text}',muckcounttype = '${spinner_UseNumber_edit.selectedItem}' WHERE id_ LIKE '${farmid}'")
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){
                     Toast.makeText(this,"fail", Toast.LENGTH_SHORT).show()
                 }
-                startActivity(Intent(this, FarmworkData::class.java))
+                startActivity(Intent(this, MuckworkData::class.java))
                 editText_MuckName_edit.setText("")
                 editText_UseNumber_edit.setText("")
             }

@@ -37,7 +37,7 @@ class worm_work_edit : AppCompatActivity() {
         var date = ""
         var code = ""
         var crop = ""
-        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB WHERE rowid LIKE '${farmid}'", null)
+        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB WHERE id_ LIKE '${farmid}'", null)
         c.moveToFirst()
         for (i in 0 until c.count) {
             name = "${c.getString(11)}"
@@ -61,7 +61,7 @@ class worm_work_edit : AppCompatActivity() {
         editText_WormOther_edit.setText("${other}")
 
         btn_worm_add_edit.setOnClickListener {
-            if (editText_WormWho.length()<1 || editText_WormName.length()<1 || editText_WormNumber.length()<1 || editText_WormUse.length()<1 || editText_WormMultiple.length()<1){
+            if (editText_WormWho_edit.length()<1 || editText_WormName_edit.length()<1 || editText_WormNumber_edit.length()<1 || editText_WormUse_edit.length()<1 || editText_WormMultiple_edit.length()<1){
                 Toast.makeText(this,"請勿留空", Toast.LENGTH_SHORT).show()
             }else {
                 try {
@@ -69,12 +69,12 @@ class worm_work_edit : AppCompatActivity() {
                         "UPDATE FarmWorkDB SET wormwho = '${editText_WormWho_edit.text}',wormname = '${editText_WormName_edit.text}'," +
                                 "wormnumber = '${editText_WormNumber_edit.text}',wormuse = '${editText_WormUse_edit.text}'," +
                                 "wormmultiple = '${editText_WormMultiple_edit.text}'," +
-                                "wormother = '${editText_WormOther_edit.text}' WHERE rowid LIKE '${farmid}'")
+                                "wormother = '${editText_WormOther_edit.text}' WHERE id_ LIKE '${farmid}'")
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){
                     Toast.makeText(this,"fail", Toast.LENGTH_SHORT).show()
                 }
-                startActivity(Intent(this, FarmworkData::class.java))
+                startActivity(Intent(this, WormworkData::class.java))
                 editText_WormWho_edit.setText("")
                 editText_WormName_edit.setText("")
                 editText_WormNumber_edit.setText("")

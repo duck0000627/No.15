@@ -90,7 +90,6 @@ class farm_work_edit : AppCompatActivity() {
 
         }
         c.close()
-
     }
 
     override fun onDestroy() {

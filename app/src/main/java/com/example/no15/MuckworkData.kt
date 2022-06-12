@@ -115,6 +115,7 @@ class MuckworkData : AppCompatActivity() {
                 code.add("${c.getString(2)}")
                 number.add("${c.getString(3)}")
                 crop.add("${c.getString(0)}")
+                id_.add("${c.getString(16)}")
                 c.moveToNext()
             }
 
@@ -156,12 +157,13 @@ class MuckworkData : AppCompatActivity() {
                 .setNegativeButton("編輯") { dialog, which ->
                     try {
 //                        val search = click
-                        Log.d("dddddddd","${i}")
+                        Log.d("dddddddd","${id_[i]}}")
                         val intent = Intent(this,muck_work_edit::class.java)
-                        intent.putExtra("id","${i}")
+                        intent.putExtra("id","${id_[i]}")
                         startActivity(intent)
                         Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
                     } catch (e: Exception) {
+                        Log.d("ddddd","${id_[i]}}")
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }.show()

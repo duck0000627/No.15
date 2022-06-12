@@ -96,9 +96,6 @@ class FarmworkData : AppCompatActivity() {
         adapter.notifyDataSetChanged()
 
         LV_farmwork.setOnItemClickListener { adapterView, view, i, l ->                 //點擊顯示
-
-//            val search = "SELECT * FROM FarmWorkDB WHERE id_ = '${click}'"              //get跟listview同位置的資料
-//            val c = dbrw.rawQuery(search, null)
             val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
             c.moveToFirst()
             date.clear()
@@ -108,7 +105,7 @@ class FarmworkData : AppCompatActivity() {
             number.clear()
             tips.clear()
             id_.clear()
-            for (i in 0 until c.count) {     //c.count = 資料筆數
+            for (i in 0 until c.count) {            //c.count = 資料筆數
                 date.add("${c.getString(1)}")
                 crop.add("${c.getString(0)}")
                 work.add("${c.getString(4)}")
@@ -161,14 +158,12 @@ class FarmworkData : AppCompatActivity() {
                                     Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                                 }
                             }.show()
-
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->                                 //編輯
                     try {
-//                        val search = click
                         Log.d("dddddddd", "${id_[i]}")
                         val intent = Intent(this, farm_work_edit::class.java)
                         intent.putExtra("id", "${id_[i]}")

@@ -136,14 +136,6 @@ class FarmWork : AppCompatActivity() {
                             other.toString()      //15  wormother
                         )
                     )
-//                    dbrw.execSQL(
-//                        "INSERT INTO FarmWorkDB(crop,date,code,number,work,tips," +
-//                                "mucktype,muckname,muckcount,muckcounttype," +
-//                                "wormwho,wormname,wormnumber,wormuse,wormmultiple,wormother) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-//                        arrayOf(
-//
-//                        )
-//                    )
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
