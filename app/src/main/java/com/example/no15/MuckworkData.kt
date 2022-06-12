@@ -19,6 +19,15 @@ import kotlinx.android.synthetic.main.activity_wormwork_data.*
 class MuckworkData : AppCompatActivity() {
 
     private var items: ArrayList<String> = ArrayList()
+    private var id_: ArrayList<String> = ArrayList()
+    private var muckname:ArrayList<String> = ArrayList()
+    private var type:ArrayList<String> = ArrayList()
+    private var counttype:ArrayList<String> = ArrayList()
+    private var count:ArrayList<String> = ArrayList()
+    private var date:ArrayList<String> = ArrayList()
+    private var code:ArrayList<String> = ArrayList()
+    private var number:ArrayList<String> = ArrayList()
+    private var crop:ArrayList<String> = ArrayList()
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var dbrw: SQLiteDatabase
 
@@ -75,54 +84,81 @@ class MuckworkData : AppCompatActivity() {
         show()
 
         LV_muckwork.setOnItemClickListener { adapterView, view, i, l ->
-            var muckname = ""
-            var type = ""
-            var counttype = ""
-            var count = ""
-            var date = ""
-            var code = ""
-            var number = ""
-            var crop = ""
+//            var muckname = ""
+//            var type = ""
+//            var counttype = ""
+//            var count = ""
+//            var date = ""
+//            var code = ""
+//            var number = ""
+//            var crop = ""
 //            var data = arrayOf("date","crop","work","code","number","tips")
-            val click = l+1
-            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"
-            val c = dbrw.rawQuery(search, null)
+//            val click = l+1
+//            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"
+            val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
             c.moveToFirst()
+            id_.clear()
+            muckname.clear()
+            type.clear()
+            counttype.clear()
+            count.clear()
+            date.clear()
+            code.clear()
+            number.clear()
+            crop.clear()
             for (i in 0 until c.count) {
-                muckname = "${c.getString(7)}"
-                type = "${c.getString(6)}"
-                counttype = "${c.getString(9)}"
-                count = "${c.getString(8)}"
-                date = "${c.getString(1)}"
-                code = "${c.getString(2)}"
-                number = "${c.getString(3)}"
-                crop = "${c.getString(0)}"
+                muckname.add("${c.getString(7)}")
+                type.add("${c.getString(6)}")
+                counttype.add("${c.getString(9)}")
+                count.add("${c.getString(8)}")
+                date.add("${c.getString(1)}")
+                code.add("${c.getString(2)}")
+                number.add("${c.getString(3)}")
+                crop.add("${c.getString(0)}")
                 c.moveToNext()
             }
 
             AlertDialog.Builder(this)
-                .setTitle("${date}")
-                .setMessage("田區:${code}${number}\n" +
-                        "農作物:\t\t\t${crop}\n" +
-                        "施肥別:\t\t\t${type}\n" +
-                        "資材名稱 :${muckname}\n" +
-                        "使用量 :\t\t\t${count}${counttype}")
-                .setPositiveButton("刪除") { dialog, which ->
+                .setTitle("${date[i]}")
+                .setMessage("田區:${code[i]}${number[i]}\n" +
+                        "農作物:\t\t\t${crop[i]}\n" +
+                        "施肥別:\t\t\t${type[i]}\n" +
+                        "資材名稱 :${muckname[i]}\n" +
+                        "使用量 :\t\t\t${count[i]}${counttype[i]}")
+                .setPositiveButton("刪除") { dialog, which ->          //刪除
                     try {
-//                        dbrw.execSQL("DELETE FROM MuckWorkDB WHERE (rowid-1) LIKE '${click}'")
-                        Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
-//                        adapter.notifyDataSetChanged()
-//                        startActivity(Intent(this,FarmworkData::class.java))
+                        AlertDialog.Builder(this)
+                            .setTitle("刪除")                                                          //確定刪除
+                            .setMessage("確定刪除紀錄內容?")
+                            .setPositiveButton("確定") { dialog, which ->
+                                try {
+                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE id_ LIKE '${id_[i]}'")
+                                    Toast.makeText(this, "delete success", Toast.LENGTH_SHORT).show()
+                                    val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
+                                    c.moveToFirst()
+                                    adapter.notifyDataSetChanged()
+                                    startActivity(Intent(this, FarmworkData::class.java))
+                                } catch (e: Exception) {
+                                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            .setNegativeButton("取消") { dialog, which ->
+                                try {
+                                    Toast.makeText(this, "cancle", Toast.LENGTH_SHORT).show()
+                                } catch (e: Exception) {
+                                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+                                }
+                            }.show()
                     } catch (e: Exception) {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("編輯") { dialog, which ->
                     try {
-                        val search = click
-                        Log.d("dddddddd","${search}")
+//                        val search = click
+                        Log.d("dddddddd","${i}")
                         val intent = Intent(this,muck_work_edit::class.java)
-                        intent.putExtra("id","${search}")
+                        intent.putExtra("id","${i}")
                         startActivity(intent)
                         Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
                     } catch (e: Exception) {

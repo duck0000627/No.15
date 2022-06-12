@@ -121,7 +121,8 @@ class OtherworkData : AppCompatActivity() {
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count){
-            items.add("日期:${c.getString(0)}內容:${c.getString(1)}")
+            items.add("\t\t${c.getString(0)}\n" +
+                    "\t\t\t\t\t\t\t\t\t${c.getString(1)}")
             c.moveToNext()
         }
         adapter.notifyDataSetChanged()

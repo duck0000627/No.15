@@ -156,9 +156,9 @@ class FarmworkData : AppCompatActivity() {
                             }
                             .setNegativeButton("取消") { dialog, which ->
                                 try {
-
+                                    Toast.makeText(this, "cancle", Toast.LENGTH_SHORT).show()
                                 } catch (e: Exception) {
-
+                                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                                 }
                             }.show()
 
