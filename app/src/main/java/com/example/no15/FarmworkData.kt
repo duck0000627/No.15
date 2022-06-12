@@ -32,8 +32,7 @@ class FarmworkData : AppCompatActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         LV_farmwork.adapter = adapter
 
-        add_record_farmwork.setOnClickListener {
-            //紀錄(筆)按鈕
+        add_record_farmwork.setOnClickListener {                               //紀錄(筆)按鈕
             startActivity(Intent(this, FarmWork::class.java))                //按按鈕切換到新增頁面
         }
 
@@ -74,14 +73,14 @@ class FarmworkData : AppCompatActivity() {
             return@setNavigationItemSelectedListener true
         }
 
-//        show()
-
-        val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
+        val c =
+            dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)                      //        show()
         c.moveToFirst()
         items.clear()
         for (i in 0 until c.count) {
             items.add(
-                "\t\t\t\t${c.getString(1)}" +
+                "農作物:${c.getString(0)}\n\n" +
+                        "\t\t\t\t${c.getString(1)}" +
                         "\t\t\t\t\t\t\t\t${c.getString(4)}" +
                         "\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}" +
                         "\t\t\t\t\t\t\t\t\t\t\t${c.getString(5)}"
@@ -90,27 +89,31 @@ class FarmworkData : AppCompatActivity() {
         }
         adapter.notifyDataSetChanged()
 
-        LV_farmwork.setOnItemClickListener { adapterView, view, i, l ->     //點擊顯示
+        LV_farmwork.setOnItemClickListener { adapterView, view, i, l ->                 //點擊顯示
             var date = ""
             var crop = ""
             var work = ""
             var code = ""
             var number = ""
             var tips = ""
-            val click = l+1
-            val search = "SELECT * FROM FarmWorkDB WHERE rowid = '${click}'"           //get跟listview同位置的資料
+            val click = l + 1
+            val search =
+                "SELECT * FROM FarmWorkDB WHERE id_ = '${click}'"           //get跟listview同位置的資料
             val c = dbrw.rawQuery(search, null)
             c.moveToFirst()
-            Toast.makeText(this,"${c}",Toast.LENGTH_SHORT).show()
-            for (i in 0 until c.count) {
-                date = "${c.getString(1)}"
-                crop = "${c.getString(0)}"
-                work = "${c.getString(4)}"
-                code = "${c.getString(2)}"
-                number = "${c.getString(3)}"
-                tips = "${c.getString(5)}"
-                c.moveToNext()
+            for (i in 0 until c.count) {     //c.count = 資料筆數
+                if ("${c.getString(1)}" == "") {
+                    c.moveToNext()
+                }else {
+                    date = "${c.getString(1)}"
+                    crop = "${c.getString(0)}"
+                    work = "${c.getString(4)}"
+                    code = "${c.getString(2)}"
+                    number = "${c.getString(3)}"
+                    tips = "${c.getString(5)}"
+                }
             }
+            Toast.makeText(this, "${date}", Toast.LENGTH_SHORT).show()
 
 
             val view = if (work == "防病蟲害") {       //根據點開的顯示alert的圖片
@@ -134,16 +137,23 @@ class FarmworkData : AppCompatActivity() {
                 .setPositiveButton("刪除") { dialog, which ->
                     try {
                         AlertDialog.Builder(this)
-                            .setTitle("刪除")
+                            .setTitle("刪除")                                                          //刪除
                             .setMessage("確定刪除紀錄內容?")
                             .setPositiveButton("確定") { dialog, which ->
                                 try {
-//                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE id LIKE '${click}'")
-//                                    Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
+                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE id_ LIKE '${click}'")
+                                    Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
 //                                    val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
 //                                    c.moveToFirst()
-//                                    adapter.notifyDataSetChanged()
-//                                    startActivity(Intent(this, FarmworkData::class.java))
+//                                    for (i in 1 until c.count) {
+//                                        if (c.getString(16) != "${i}") {
+//                                            var id_delete = "${c.getString(16)}"
+//                                            dbrw.execSQL("UPDATE FarmWorkDB SET id_ = '${i}' WHERE id_ = ${id_delete}")
+//                                        }
+//                                        c.moveToNext()
+//                                    }
+                                    adapter.notifyDataSetChanged()
+                                    startActivity(Intent(this, FarmworkData::class.java))
                                 } catch (e: Exception) {
                                     Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                                 }
@@ -160,12 +170,12 @@ class FarmworkData : AppCompatActivity() {
                         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                     }
                 }
-                .setNegativeButton("編輯") { dialog, which ->      //編輯
+                .setNegativeButton("編輯") { dialog, which ->                                 //編輯
                     try {
                         val search = click
-                        Log.d("dddddddd","${search}")
-                        val intent = Intent(this,farm_work_edit::class.java)
-                        intent.putExtra("id","${search}")
+                        Log.d("dddddddd", "${search}")
+                        val intent = Intent(this, farm_work_edit::class.java)
+                        intent.putExtra("id", "${search}")
                         startActivity(intent)
                         Toast.makeText(this, "編輯", Toast.LENGTH_SHORT).show()
                     } catch (e: Exception) {
@@ -178,10 +188,17 @@ class FarmworkData : AppCompatActivity() {
 
     }
 
-
-    private fun show() {
-
+    override fun onBackPressed() {    //上一頁
+        AlertDialog.Builder(this)    //會跳一個提示框
+            .setTitle("登出")
+            .setMessage("確定登出?")
+            .setNegativeButton("取消"){
+                    dialog, which->
+                Toast.makeText(this,"取消", Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("登出") {dialog,which ->
+                startActivity(Intent(this, MainActivity::class.java)) //案箭頭回上一頁
+            }.show()
     }
-
 
 }

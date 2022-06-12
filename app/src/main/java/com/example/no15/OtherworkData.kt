@@ -126,4 +126,17 @@ class OtherworkData : AppCompatActivity() {
         }
         adapter.notifyDataSetChanged()
     }
+
+    override fun onBackPressed() {    //上一頁
+        AlertDialog.Builder(this)    //會跳一個提示框
+            .setTitle("登出")
+            .setMessage("確定登出?")
+            .setNegativeButton("取消"){
+                    dialog, which->
+                Toast.makeText(this,"取消", Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("登出") {dialog,which ->
+                startActivity(Intent(this, MainActivity::class.java)) //案箭頭回上一頁
+            }.show()
+    }
 }
