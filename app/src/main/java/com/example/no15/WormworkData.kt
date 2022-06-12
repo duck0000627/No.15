@@ -80,22 +80,10 @@ class WormworkData : AppCompatActivity() {
 
         show()
 
-        LV_wormwork.setOnItemClickListener { adapterView, view, i, l ->
-//            var who = ""
-//            var name = ""
-//            var farmnumber = ""
-//            var number = ""
-//            var use = ""
-//            var multiple = ""
-//            var other = ""
-//            var date = ""
-//            var code = ""
-//            var crop = ""
-//            val search = "SELECT * FROM FarmWorkDB WHERE (rowid) LIKE '${click}'"
-//            val click = l+1
+        LV_wormwork.setOnItemClickListener { adapterView, view, i, l ->                    //被點選後
             val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
-            c.moveToFirst()
-            id_.clear()
+            c.moveToFirst()                                                 //移到第一筆資料
+            id_.clear()                 //清空array
             who.clear()
             name.clear()
             farmnumber.clear()
@@ -106,7 +94,7 @@ class WormworkData : AppCompatActivity() {
             date.clear()
             code.clear()
             crop.clear()
-            for (i in 0 until c.count) {
+            for (i in 0 until c.count) {      //把資料丟到array
                 name.add("${c.getString(11)}")
                 who.add("${c.getString(10)}")
                 multiple.add("${c.getString(14)}")
@@ -118,16 +106,16 @@ class WormworkData : AppCompatActivity() {
                 code.add("${c.getString(2)}")
                 farmnumber.add("${c.getString(3)}")
                 id_.add("${c.getString(16)}")
-                c.moveToNext()
+                c.moveToNext()           //下一筆資料
             }
-            Toast.makeText(this, "${id_[i]}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "${id_[i]}", Toast.LENGTH_SHORT).show()
             AlertDialog.Builder(this)       //小框框
                 .setTitle("${date[i]}")
-                .setMessage("田區:${code[i]}${farmnumber[i]}\n" +
-                        "農作物:${crop[i]}" +
-                        "防治對象 :${who[i]}\n" +
+                .setMessage("田區:\t\t\t${code[i]}${farmnumber[i]}\n" +
+                        "農作物:\t\t\t${crop[i]}\n" +
+                        "防治對象 :\t\t\t${who[i]}\n" +
                         "資材名稱:\t\t\t${name[i]}\n" +
-                        "批號 :${number[i]}\n" +
+                        "批號 :\t\t\t${number[i]}\n" +
                         "使用量:\t\t\t${use[i]}\n" +
                         "稀釋倍數:\t\t\t${multiple[i]}倍\n" +
                         "其他:\t\t\t${other[i]}")
@@ -138,7 +126,7 @@ class WormworkData : AppCompatActivity() {
                             .setMessage("確定刪除紀錄內容?")
                             .setPositiveButton("確定") { dialog, which ->
                                 try {
-                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE id_ LIKE '${id_[i]}'")
+                                    dbrw.execSQL("DELETE FROM FarmWorkDB WHERE id_ LIKE '${id_[i]}'")   //挑點選的那行
                                     Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
                                     val c = dbrw.rawQuery("SELECT * FROM FarmWorkDB", null)
                                     c.moveToFirst()
@@ -162,7 +150,6 @@ class WormworkData : AppCompatActivity() {
                 }
                 .setNegativeButton("編輯") { dialog, which ->                                 //編輯
                     try {
-//                        val search = click
                         Log.d("dddddddd", "${id_[i]}")
                         val intent = Intent(this, worm_work_edit::class.java)
                         intent.putExtra("id", "${id_[i]}")

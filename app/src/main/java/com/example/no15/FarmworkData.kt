@@ -33,8 +33,6 @@ class FarmworkData : AppCompatActivity() {
 
         LV_farmwork.bringToFront()
 
-        Stetho.initializeWithDefaults(this)     //看資料庫的套件程式
-
         dbrw = MyDBHelper(this).writableDatabase
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         LV_farmwork.adapter = adapter
