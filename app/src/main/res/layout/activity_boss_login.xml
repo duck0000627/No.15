@@ -14,7 +14,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:minHeight="?attr/actionBarSize"
         android:backgroundTint="@color/toolbar"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"/>
 
@@ -32,8 +31,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.731" />
+        app:layout_constraintTop_toBottomOf="@+id/BossPassword"
+        app:layout_constraintVertical_bias="0.377" />
 
     <TextView
         android:id="@+id/textView3"
@@ -80,11 +79,11 @@
         android:layout_width="40dp"
         android:layout_height="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintEnd_toStartOf="@+id/BossAccount"
+        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.434"
+        app:layout_constraintVertical_bias="0.446"
         app:srcCompat="@drawable/user" />
 
     <ImageView
@@ -92,8 +91,8 @@
         android:layout_width="40dp"
         android:layout_height="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintEnd_toStartOf="@+id/BossPassword"
+        app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.527"

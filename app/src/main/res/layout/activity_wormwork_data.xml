@@ -37,12 +37,12 @@
         android:layout_width="409dp"
         android:layout_height="56dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/LV_wormwork"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_wormwork_data"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <TextView
@@ -72,14 +72,14 @@
 
     <ListView
         android:id="@+id/LV_wormwork"
-        android:layout_width="409dp"
-        android:layout_height="601dp"
+        android:layout_width="392dp"
+        android:layout_height="595dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.882" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/layout_drawer_Wormwork"

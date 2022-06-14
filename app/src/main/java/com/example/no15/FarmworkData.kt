@@ -83,10 +83,9 @@ class FarmworkData : AppCompatActivity() {
         items.clear()
         for (i in 0 until c.count) {
             items.add(
-                "農作物:${c.getString(0)}\n\n" +
-                        "\t\t\t\t${c.getString(1)}" +
-                        "\t\t\t\t\t\t\t\t${c.getString(4)}" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}" +
+                "\t\t\t\t\t${c.getString(1)}\t\t\t\t\t農作物:\t\t${c.getString(0)}\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t${c.getString(4)}" +
+                        "\t\t\t\t\t\t\t\t\t\t\t${c.getString(2)}${c.getString(3)}" +
                         "\t\t\t\t\t\t\t\t\t\t\t${c.getString(5)}"
             )
             c.moveToNext()

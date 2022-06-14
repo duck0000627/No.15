@@ -109,6 +109,8 @@ class FarmWork : AppCompatActivity() {
         }
 
 
+
+
         button_to_muck.setOnClickListener{                 //肥料使用紀錄按鈕
             val bundle = Bundle()
             bundle.putString("who","${who}")
@@ -240,7 +242,7 @@ class FarmWork : AppCompatActivity() {
     }
 
     private fun BCDE(){                                         //選到BCDE時的函式
-        val number_BCDE = arrayListOf("1","2","3","4","5","6","1~6")
+        val number_BCDE = arrayListOf("1","2","3","4","5","6","1~3","3~6","1~6")
         val arrayAdapter_BCDE = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_BCDE)
         spinner_Number.adapter = arrayAdapter_BCDE
         spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{

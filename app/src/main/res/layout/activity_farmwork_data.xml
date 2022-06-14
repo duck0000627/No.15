@@ -58,12 +58,12 @@
         android:layout_width="409dp"
         android:layout_height="56dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/LV_farmwork"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar_farmwork_data"
-        app:layout_constraintVertical_bias="0.085">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_farmwork_data"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <TextView
@@ -72,6 +72,7 @@
             android:layout_height="wrap_content"
             android:text="日期"
             android:textAlignment="center" />
+
         <TextView
             android:id="@+id/textView16"
             android:layout_width="100dp"
@@ -96,14 +97,14 @@
 
     <ListView
         android:id="@+id/LV_farmwork"
-        android:layout_width="409dp"
-        android:layout_height="601dp"
+        android:layout_width="402dp"
+        android:layout_height="597dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.835" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
