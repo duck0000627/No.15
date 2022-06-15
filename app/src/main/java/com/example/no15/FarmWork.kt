@@ -44,7 +44,7 @@ class FarmWork : AppCompatActivity() {
             val g = it.getString("use")
             val h = it.getString("multiple")
             val i = it.getString("other")
-            val j = it.getString("number")
+            val j = it.getString("wormnumber")
             val crop = it.getString("crop")
             val date = it.getString("date")
             val code = it.getString("code")
