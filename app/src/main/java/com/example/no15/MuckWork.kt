@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -70,10 +72,22 @@ class MuckWork : AppCompatActivity() {
             spinner_UseNumber.adapter = adapter
         }
 
+        val mucknamearray = arrayListOf("純德排肥夠多633","大蘋果8號")       //肥料名稱
+        val arrayAdapter_muckname = ArrayAdapter(this,android.R.layout.simple_spinner_item,mucknamearray)
+        spinner_muckname.adapter = arrayAdapter_muckname
+        spinner_muckname.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
 
         btn_Muckwork_add.setOnClickListener {
-            if (editText_MuckName.length()<1 || editText_UseNumber.length()<1){
+            if (editText_UseNumber.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
@@ -81,7 +95,7 @@ class MuckWork : AppCompatActivity() {
                         rdb_basic.isChecked -> "基肥"
                         else -> "追肥"
                     }
-                    muckname = editText_MuckName.text.toString()
+                    muckname = spinner_muckname.selectedItem.toString()
                     count = editText_UseNumber.text.toString()
                     counttype = spinner_UseNumber.selectedItem.toString()
                     val bundle = Bundle()                           //帶資料
@@ -105,7 +119,6 @@ class MuckWork : AppCompatActivity() {
                     intent.putExtras(bundle)
                     startActivity(intent)
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
-                    editText_MuckName.setText("")
                     editText_UseNumber.setText("")
                 } catch (e: Exception) {
                     Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()

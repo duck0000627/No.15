@@ -35,7 +35,7 @@
 
     <ListView
         android:id="@+id/LV_otherwork"
-        android:layout_width="398dp"
+        android:layout_width="match_parent"
         android:layout_height="597dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
     </androidx.drawerlayout.widget.DrawerLayout>
 
     <LinearLayout
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/LV_otherwork"

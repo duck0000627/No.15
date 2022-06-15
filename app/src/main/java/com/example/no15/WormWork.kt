@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_farm_work.*
@@ -74,23 +75,18 @@ class WormWork : AppCompatActivity() {
                 }.show()
         }
 
-        toolbar_Wormwork.setOnMenuItemClickListener{
-            when(it.itemId){
-                R.id.toolbar_success -> {         //當打勾按下去
-                    startActivity(Intent(this,FarmWork::class.java))       //回到上一頁
-                }
-            }
-            false
-        }
+        val wormnamearray = arrayListOf("好磷居-中性化亞磷酸","保護橙-柑桔精油")       //田區代號
+        val arrayAdapter_wormname = ArrayAdapter(this,android.R.layout.simple_spinner_item,wormnamearray)
+        spinner_wormname.adapter = arrayAdapter_wormname
 
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
         btn_worm_add.setOnClickListener {
-            if (editText_WormWho.length()<1 || editText_WormName.length()<1 || editText_WormNumber.length()<1 || editText_WormUse.length()<1 || editText_WormMultiple.length()<1){
+            if (editText_WormWho.length()<1 || editText_WormNumber.length()<1 || editText_WormUse.length()<1 || editText_WormMultiple.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
                     who = editText_WormWho.text.toString()
-                    name = editText_WormName.text.toString()
+                    name = spinner_wormname.selectedItem.toString()
                     number = editText_WormNumber.text.toString()
                     use = editText_WormUse.text.toString()
                     multiple = editText_WormMultiple.text.toString()
@@ -117,7 +113,6 @@ class WormWork : AppCompatActivity() {
                     startActivity(intent)
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
                     editText_WormWho.setText("")
-                    editText_WormName.setText("")
                     editText_WormNumber.setText("")
                     editText_WormUse.setText("")
                     editText_WormMultiple.setText("")

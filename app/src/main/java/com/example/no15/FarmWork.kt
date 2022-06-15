@@ -77,22 +77,25 @@ class FarmWork : AppCompatActivity() {
         val use = G
         val multiple = H
         val other = I
-        val number = J
+        val wormnumber = J
 
-        editText_Crop.setText("${Crop}")
+//        editText_Crop.setText("${Crop}")
         editText_Date.setText("${Date}")
         editText_Work.setText("${Work}")
         editText_Tips.setText("${Tips}")
+
+        Toast.makeText(this,"${Number}",Toast.LENGTH_SHORT).show()
 
 
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
 
         val code = arrayListOf("A","B","C","D","E","F")       //田區代號
-        val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,code)
-        spinner_Code.adapter = arrayAdapter
+        val arrayAdapter_code = ArrayAdapter(this,android.R.layout.simple_spinner_item,code)
+        spinner_Code.adapter = arrayAdapter_code
+        seleceCode()
         spinner_Code.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{         //下拉框被選之後
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (code[p2] == "A"){
+                if (p2 == 0){
                     A()
                 }
                 if (code[p2] == "F"){
@@ -101,6 +104,7 @@ class FarmWork : AppCompatActivity() {
                 if (code[p2] == "B" || code[p2] == "C" || code[p2] == "D" || code[p2] == "E"){
                     BCDE()
                 }
+
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
@@ -108,18 +112,36 @@ class FarmWork : AppCompatActivity() {
 
         }
 
+        val crop = arrayListOf("黑豆","黃豆")       //田區代號
+        val arrayAdapter_crop = ArrayAdapter(this,android.R.layout.simple_spinner_item,crop)
+        spinner_Crop.adapter = arrayAdapter_crop
+        if ("${Crop}" == "黑豆")
+        {
+            spinner_Crop.setSelection(0,true)
+        }
+        if ("${Crop}" == "黃豆")
+        {
+            spinner_Crop.setSelection(1,true)
+        }
+        spinner_Crop.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
 
 
         button_to_muck.setOnClickListener{                 //肥料使用紀錄按鈕
             val bundle = Bundle()
             bundle.putString("who","${who}")
             bundle.putString("name","${name}")
-            bundle.putString("number","${number}")
+            bundle.putString("number","${wormnumber}")
             bundle.putString("use","${use}")
             bundle.putString("multiple","${multiple}")
             bundle.putString("other","${other}")
-            bundle.putString("crop","${editText_Crop.text}")
+            bundle.putString("crop","${spinner_Crop.selectedItem}")
             bundle.putString("date","${editText_Date.text}")
             bundle.putString("code","${spinner_Code.selectedItem}")
             bundle.putString("number","${spinner_Number.selectedItem}")
@@ -135,7 +157,7 @@ class FarmWork : AppCompatActivity() {
             bundle.putString("muckname","${muckname}")
             bundle.putString("count","${count}")
             bundle.putString("counttype","${counttype}")
-            bundle.putString("crop","${editText_Crop.text}")
+            bundle.putString("crop","${spinner_Crop.selectedItem}")
             bundle.putString("date","${editText_Date.text}")
             bundle.putString("code","${spinner_Code.selectedItem}")
             bundle.putString("number","${spinner_Number.selectedItem}")
@@ -147,7 +169,7 @@ class FarmWork : AppCompatActivity() {
         }
 
         button_Farmwork_add.setOnClickListener {                                                             //新增資料
-            if (editText_Crop.length()<1 || editText_Date.length()<1 || editText_Work.length()<1){
+            if (editText_Date.length()<1 || editText_Work.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
@@ -156,7 +178,7 @@ class FarmWork : AppCompatActivity() {
                                 "mucktype,muckname,muckcount,muckcounttype," +
                                 "wormwho,wormname,wormnumber,wormuse,wormmultiple,wormother) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                         arrayOf(
-                            editText_Crop.text.toString(),  //0  農作物
+                            spinner_Crop.selectedItem.toString(),  //0  農作物
                             editText_Date.text.toString(),  //1  日期
                             spinner_Code.selectedItem.toString(),  //2  田區
                             spinner_Number.selectedItem.toString(),  //3 號碼
@@ -168,7 +190,7 @@ class FarmWork : AppCompatActivity() {
                             counttype.toString(),  //9  muckcounttype
                             who.toString(),  //10  wormwho
                             name.toString(),  //11  wormname
-                            number.toString(),//12  wormnumber
+                            wormnumber.toString(),//12  wormnumber
                             use.toString(),  //13 wormuse
                             multiple.toString(),  //14  wormmultiple
                             other.toString()      //15  wormother
@@ -179,7 +201,6 @@ class FarmWork : AppCompatActivity() {
                     Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
                 }
                 startActivity(Intent(this, FarmworkData::class.java))
-                editText_Crop.setText("")
                 editText_Date.setText("")
                 editText_Work.setText("")
                 editText_Tips.setText("")
@@ -208,11 +229,56 @@ class FarmWork : AppCompatActivity() {
             }.show()
     }
 
+    private fun seleceCode(){               //跳畫面選項會留者
+        if ("${Code}" == "A")
+        {
+            spinner_Code.setSelection(0,true)
+            A()
+        }
+        if ("${Code}" == "B")
+        {
+            spinner_Code.setSelection(1,true)
+            BCDE()
+        }
+        else if ("${Code}" == "C")
+        {
+            spinner_Code.setSelection(2,true)
+            BCDE()
+        }
+        else if ("${Code}" == "D")
+        {
+            spinner_Code.setSelection(3,true)
+            BCDE()
+        }
+        else if ("${Code}" == "E")
+        {
+            spinner_Code.setSelection(4,true)
+            BCDE()
+        }
+        else if("${Code}" == "F")
+        {
+            spinner_Code.setSelection(5,true)
+            F()
+        }
+    }
+
 
     private fun A(){                             //選到A時的函式
         val number_A = arrayListOf("1","2","1~2")
         val arrayAdapter_A = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_A)
         spinner_Number.adapter = arrayAdapter_A
+        if ("${Number}" == "1")
+        {
+            spinner_Number.setSelection(0,true)
+        }
+        if ("${Number}" == "2")
+        {
+            spinner_Number.setSelection(1,true)
+        }
+        if ("${Number}" == "1~2")
+        {
+            spinner_Number.setSelection(2,true)
+        }
         spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
@@ -229,9 +295,25 @@ class FarmWork : AppCompatActivity() {
         val number_F = arrayListOf("1","2","3","1~3")
         val arrayAdapter_F = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_F)
         spinner_Number.adapter = arrayAdapter_F
+        if ("${Number}" == "1")
+        {
+            spinner_Number.setSelection(0,true)
+        }
+        if ("${Number}" == "2")
+        {
+            spinner_Number.setSelection(1,true)
+        }
+        if ("${Number}" == "3")
+        {
+            spinner_Number.setSelection(2,true)
+        }
+        if ("${Number}" == "1~3")
+        {
+            spinner_Number.setSelection(3,true)
+        }
         spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Toast.makeText(this@FarmWork,number_F[p2],Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@FarmWork,number_F[p2],Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -245,9 +327,45 @@ class FarmWork : AppCompatActivity() {
         val number_BCDE = arrayListOf("1","2","3","4","5","6","1~3","3~6","1~6")
         val arrayAdapter_BCDE = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_BCDE)
         spinner_Number.adapter = arrayAdapter_BCDE
+        if ("${Number}" == "1")
+        {
+            spinner_Number.setSelection(0,true)
+        }
+        if ("${Number}" == "2")
+        {
+            spinner_Number.setSelection(1,true)
+        }
+        if ("${Number}" == "3")
+        {
+            spinner_Number.setSelection(2,true)
+        }
+        if ("${Number}" == "4")
+        {
+            spinner_Number.setSelection(3,true)
+        }
+        if ("${Number}" == "5")
+        {
+            spinner_Number.setSelection(4,true)
+        }
+        if ("${Number}" == "6")
+        {
+            spinner_Number.setSelection(5,true)
+        }
+        if ("${Number}" == "1~3")
+        {
+            spinner_Number.setSelection(6,true)
+        }
+        if ("${Number}" == "3~6")
+        {
+            spinner_Number.setSelection(7,true)
+        }
+        if ("${Number}" == "1~6")
+        {
+            spinner_Number.setSelection(8,true)
+        }
         spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Toast.makeText(this@FarmWork,number_BCDE[p2],Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@FarmWork,number_BCDE[p2],Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {

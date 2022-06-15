@@ -25,8 +25,8 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editText_Crop_edit"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_Crop_edit"
+        app:layout_constraintHorizontal_bias="0.673"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.158" />
@@ -122,18 +122,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.599" />
 
-    <EditText
-        android:id="@+id/editText_Crop_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+    <Spinner
+        android:id="@+id/spinner_Crop_edit"
+        android:layout_width="250dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.158" />
+        app:layout_constraintVertical_bias="0.159" />
 
     <EditText
         android:id="@+id/editText_Work_edit"

@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -58,11 +60,30 @@ class muck_work_edit : AppCompatActivity() {
             c.moveToNext()
         }
         Log.d("dddddddd","${farmid}")
-        editText_MuckName_edit.setText("${muckname}")
         editText_UseNumber_edit.setText("${count}")
 
+        val mucknamearray = arrayListOf("純德排肥夠多633","大蘋果8號")       //肥料名稱
+        val arrayAdapter_muckname = ArrayAdapter(this,android.R.layout.simple_spinner_item,mucknamearray)
+        spinner_muckname_edit.adapter = arrayAdapter_muckname
+        if (muckname == "純德排肥夠多633")
+        {
+            spinner_muckname_edit.setSelection(0,true)
+        }
+        if (muckname == "大蘋果8號")
+        {
+            spinner_muckname_edit.setSelection(1,true)
+        }
+        spinner_muckname_edit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+
         btn_Muckwork_add_edit.setOnClickListener {
-            if (editText_MuckName_edit.length()<1 || editText_UseNumber_edit.length()<1){
+            if (editText_UseNumber_edit.length()<1){
                 Toast.makeText(this,"請勿留空", Toast.LENGTH_SHORT).show()
             }else {
                 try {
@@ -71,14 +92,13 @@ class muck_work_edit : AppCompatActivity() {
                         else -> "追肥"
                     }
                     dbrw.execSQL(
-                        "UPDATE FarmWorkDB SET mucktype = '${mucktypeselect}',muckname = '${editText_MuckName_edit.text}'," +
+                        "UPDATE FarmWorkDB SET mucktype = '${mucktypeselect}',muckname = '${spinner_muckname_edit.selectedItem}'," +
                                 "muckcount = '${editText_UseNumber_edit.text}',muckcounttype = '${spinner_UseNumber_edit.selectedItem}' WHERE id_ LIKE '${farmid}'")
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){
                     Toast.makeText(this,"fail", Toast.LENGTH_SHORT).show()
                 }
                 startActivity(Intent(this, MuckworkData::class.java))
-                editText_MuckName_edit.setText("")
                 editText_UseNumber_edit.setText("")
             }
         }
