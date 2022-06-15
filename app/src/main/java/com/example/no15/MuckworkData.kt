@@ -113,7 +113,7 @@ class MuckworkData : AppCompatActivity() {
                 .setMessage("田區:${code[i]}${number[i]}\n" +
                         "農作物:\t\t\t${crop[i]}\n" +
                         "施肥別:\t\t\t${type[i]}\n" +
-                        "資材名稱 :${muckname[i]}\n" +
+                        "資材名稱 :\t${muckname[i]}\n" +
                         "使用量 :\t\t\t${count[i]}${counttype[i]}")
                 .setPositiveButton("刪除") { dialog, which ->          //刪除
                     try {

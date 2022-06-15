@@ -113,7 +113,7 @@ class FarmworkData : AppCompatActivity() {
                 c.moveToNext()
             }
 
-            Toast.makeText(this, "${id_[i]}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "${id_[i]}", Toast.LENGTH_SHORT).show()
             val view = if ("${work[i]}" == "防病蟲害") {       //根據點開的顯示alert的圖片
                 LayoutInflater.from(this).inflate(R.layout.activity_worm_alert, null)
             } else if ("${work[i]}" == "除草") {

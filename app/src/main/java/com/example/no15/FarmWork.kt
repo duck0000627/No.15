@@ -68,23 +68,23 @@ class FarmWork : AppCompatActivity() {
             Work = work
             Tips = tips
         }
-        val mucktypeselect = A
-        val muckname = B
-        val count = C
-        val counttype = D
-        val who = E
-        val name = F
-        val use = G
-        val multiple = H
-        val other = I
-        val wormnumber = J
+        var mucktypeselect = A
+        var muckname = B
+        var count = C
+        var counttype = D
+        var who = E
+        var name = F
+        var use = G
+        var multiple = H
+        var other = I
+        var wormnumber = J
 
 //        editText_Crop.setText("${Crop}")
         editText_Date.setText("${Date}")
         editText_Work.setText("${Work}")
         editText_Tips.setText("${Tips}")
 
-        Toast.makeText(this,"${Number}",Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this,"${Number}",Toast.LENGTH_SHORT).show()
 
 
         dbrw = MyDBHelper(this).writableDatabase     //取得資料庫
@@ -173,6 +173,37 @@ class FarmWork : AppCompatActivity() {
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
+                    if (mucktypeselect == "" || mucktypeselect == "null") {      //
+                        mucktypeselect = "-"
+                    }
+                    if (muckname == "" || muckname == "null") {
+                        muckname = "-"
+                    }
+                    if (count == "" || count == "null") {
+                        count = "-"
+                    }
+                    if (counttype == "" || counttype == "null") {
+                        counttype = "-"
+                    }
+                    if (who == "" || who == "null") {
+                        who = "-"
+                    }
+                    if (name == "" || name == "null") {
+                        name = "-"
+                    }
+                    if (wormnumber == "" || wormnumber == "null") {
+                        wormnumber = "-"
+                    }
+                    if (use == "" || use == "null") {
+                        use = "-"
+                    }
+                    if (multiple == "" || multiple == "null") {
+                        multiple = "-"
+                    }
+                    if (other == "" || other == "null") {
+                        other = "-"
+                    }
+
                     dbrw.execSQL(
                         "INSERT INTO FarmWorkDB(crop,date,code,number,work,tips," +
                                 "mucktype,muckname,muckcount,muckcounttype," +
