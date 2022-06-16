@@ -39,10 +39,12 @@
         <entry key="..\:/No15/app/src/main/res/layout/fragment_other_data.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/fragment_worm_data.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/grass_alert.xml" value="0.12335359675785208" />
+        <entry key="..\:/No15/app/src/main/res/layout/harvest_alert.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/land_alert.xml" value="0.20726495726495728" />
         <entry key="..\:/No15/app/src/main/res/layout/login_alert.xml" value="0.25364583333333335" />
         <entry key="..\:/No15/app/src/main/res/layout/muck_alert.xml" value="0.12284701114488349" />
         <entry key="..\:/No15/app/src/main/res/layout/mydb.xml" value="0.18568840579710144" />
+        <entry key="..\:/No15/app/src/main/res/layout/other_alert.xml" value="0.20726495726495728" />
         <entry key="..\:/No15/app/src/main/res/layout/seed_alert.xml" value="0.2526041666666667" />
         <entry key="..\:/No15/app/src/main/res/layout/water_alert.xml" value="0.12284701114488349" />
         <entry key="..\:/No15/app/src/main/res/menu/add_toolbar.xml" value="0.25364583333333335" />
