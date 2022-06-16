@@ -124,8 +124,12 @@ class FarmworkData : AppCompatActivity() {
                 LayoutInflater.from(this).inflate(R.layout.water_alert, null)
             } else if ("${work[i]}" == "播種") {
                 LayoutInflater.from(this).inflate(R.layout.seed_alert, null)
-            } else {
+            } else if ("${work[i]}" == "採收"){
+                LayoutInflater.from(this).inflate(R.layout.harvest_alert, null)
+            }else if ("${work[i]}" == "整地"){
                 LayoutInflater.from(this).inflate(R.layout.land_alert, null)
+            }else{
+                LayoutInflater.from(this).inflate(R.layout.other_alert, null)
             }
             AlertDialog.Builder(this)      //小框框
                 .setTitle("日期:${date[i]}")

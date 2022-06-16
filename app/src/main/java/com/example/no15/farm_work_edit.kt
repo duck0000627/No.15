@@ -126,25 +126,177 @@ class farm_work_edit : AppCompatActivity() {
 
             }
         }
-        if ("${Code}" == "B")
+        if ("${Code}" == "B")                                    //判斷值更改下拉框預設值
         {
             spinner_Code_edit.setSelection(1,true)
-            BCDE()
+            val number_BCDE = arrayListOf("1","2","3","4","5","6","1~3","3~6","1~6")
+            val arrayAdapter_BCDE = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_BCDE)
+            spinner_Number_edit.adapter = arrayAdapter_BCDE
+            if ("${number}" == "1")
+            {
+                spinner_Number_edit.setSelection(0,true)
+            }
+            if ("${number}" == "2")
+            {
+                spinner_Number_edit.setSelection(1,true)
+            }
+            if ("${number}" == "3")
+            {
+                spinner_Number_edit.setSelection(2,true)
+            }
+            if ("${number}" == "4")
+            {
+                spinner_Number_edit.setSelection(3,true)
+            }
+            if ("${number}" == "5")
+            {
+                spinner_Number_edit.setSelection(4,true)
+            }
+            if ("${number}" == "6")
+            {
+                spinner_Number_edit.setSelection(5,true)
+            }
+            if ("${number}" == "1~3")
+            {
+                spinner_Number_edit.setSelection(6,true)
+            }
+            if ("${number}" == "3~6")
+            {
+                spinner_Number_edit.setSelection(7,true)
+            }
+            if ("${number}" == "1~6")
+            {
+                spinner_Number_edit.setSelection(8,true)
+            }
         }
         else if ("${Code}" == "C")
         {
             spinner_Code_edit.setSelection(2,true)
-            BCDE()
+            val number_BCDE = arrayListOf("1","2","3","4","5","6","1~3","3~6","1~6")
+            val arrayAdapter_BCDE = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_BCDE)
+            spinner_Number_edit.adapter = arrayAdapter_BCDE
+            if ("${number}" == "1")
+            {
+                spinner_Number_edit.setSelection(0,true)
+            }
+            if ("${number}" == "2")
+            {
+                spinner_Number_edit.setSelection(1,true)
+            }
+            if ("${number}" == "3")
+            {
+                spinner_Number_edit.setSelection(2,true)
+            }
+            if ("${number}" == "4")
+            {
+                spinner_Number_edit.setSelection(3,true)
+            }
+            if ("${number}" == "5")
+            {
+                spinner_Number_edit.setSelection(4,true)
+            }
+            if ("${number}" == "6")
+            {
+                spinner_Number_edit.setSelection(5,true)
+            }
+            if ("${number}" == "1~3")
+            {
+                spinner_Number_edit.setSelection(6,true)
+            }
+            if ("${number}" == "3~6")
+            {
+                spinner_Number_edit.setSelection(7,true)
+            }
+            if ("${number}" == "1~6")
+            {
+                spinner_Number_edit.setSelection(8,true)
+            }
         }
         else if ("${Code}" == "D")
         {
             spinner_Code_edit.setSelection(3,true)
-            BCDE()
+            val number_BCDE = arrayListOf("1","2","3","4","5","6","1~3","3~6","1~6")
+            val arrayAdapter_BCDE = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_BCDE)
+            spinner_Number_edit.adapter = arrayAdapter_BCDE
+            if ("${number}" == "1")
+            {
+                spinner_Number_edit.setSelection(0,true)
+            }
+            if ("${number}" == "2")
+            {
+                spinner_Number_edit.setSelection(1,true)
+            }
+            if ("${number}" == "3")
+            {
+                spinner_Number_edit.setSelection(2,true)
+            }
+            if ("${number}" == "4")
+            {
+                spinner_Number_edit.setSelection(3,true)
+            }
+            if ("${number}" == "5")
+            {
+                spinner_Number_edit.setSelection(4,true)
+            }
+            if ("${number}" == "6")
+            {
+                spinner_Number_edit.setSelection(5,true)
+            }
+            if ("${number}" == "1~3")
+            {
+                spinner_Number_edit.setSelection(6,true)
+            }
+            if ("${number}" == "3~6")
+            {
+                spinner_Number_edit.setSelection(7,true)
+            }
+            if ("${number}" == "1~6")
+            {
+                spinner_Number_edit.setSelection(8,true)
+            }
         }
         else if ("${Code}" == "E")
         {
             spinner_Code_edit.setSelection(4,true)
-            BCDE()
+            val number_BCDE = arrayListOf("1","2","3","4","5","6","1~3","3~6","1~6")
+            val arrayAdapter_BCDE = ArrayAdapter(this,android.R.layout.simple_spinner_item,number_BCDE)
+            spinner_Number_edit.adapter = arrayAdapter_BCDE
+            if ("${number}" == "1")
+            {
+                spinner_Number_edit.setSelection(0,true)
+            }
+            if ("${number}" == "2")
+            {
+                spinner_Number_edit.setSelection(1,true)
+            }
+            if ("${number}" == "3")
+            {
+                spinner_Number_edit.setSelection(2,true)
+            }
+            if ("${number}" == "4")
+            {
+                spinner_Number_edit.setSelection(3,true)
+            }
+            if ("${number}" == "5")
+            {
+                spinner_Number_edit.setSelection(4,true)
+            }
+            if ("${number}" == "6")
+            {
+                spinner_Number_edit.setSelection(5,true)
+            }
+            if ("${number}" == "1~3")
+            {
+                spinner_Number_edit.setSelection(6,true)
+            }
+            if ("${number}" == "3~6")
+            {
+                spinner_Number_edit.setSelection(7,true)
+            }
+            if ("${number}" == "1~6")
+            {
+                spinner_Number_edit.setSelection(8,true)
+            }
         }
         else if("${Code}" == "F")
         {
