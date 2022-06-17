@@ -79,9 +79,7 @@ class FarmWork : AppCompatActivity() {
         var other = I
         var wormnumber = J
 
-//        editText_Crop.setText("${Crop}")
         editText_Date.setText("${Date}")
-        editText_Work.setText("${Work}")
         editText_Tips.setText("${Tips}")
 
 //        Toast.makeText(this,"${Number}",Toast.LENGTH_SHORT).show()
@@ -112,7 +110,7 @@ class FarmWork : AppCompatActivity() {
 
         }
 
-        val crop = arrayListOf("黑豆","黃豆")       //田區代號
+        val crop = arrayListOf("黑豆","黃豆")       //田區代號下拉框
         val arrayAdapter_crop = ArrayAdapter(this,android.R.layout.simple_spinner_item,crop)
         spinner_Crop.adapter = arrayAdapter_crop
         if ("${Crop}" == "黑豆")
@@ -123,13 +121,41 @@ class FarmWork : AppCompatActivity() {
         {
             spinner_Crop.setSelection(1,true)
         }
-        spinner_Crop.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+        val work = arrayListOf("整地","播種","灌溉","除草","防病蟲害","施肥","採收","其他")       //工作下拉框
+        val arrayAdapter_work = ArrayAdapter(this,android.R.layout.simple_spinner_item,work)
+        spinner_Work.adapter = arrayAdapter_work
+        if ("${Work}" == "整地")
+        {
+            spinner_Work.setSelection(0,true)
+        }
+        if ("${Work}" == "播種")
+        {
+            spinner_Work.setSelection(1,true)
+        }
+        if ("${Work}" == "灌溉")
+        {
+            spinner_Work.setSelection(2,true)
+        }
+        if ("${Work}" == "除草")
+        {
+            spinner_Work.setSelection(3,true)
+        }
+        if ("${Work}" == "防病蟲害")
+        {
+            spinner_Work.setSelection(4,true)
+        }
+        if ("${Work}" == "施肥")
+        {
+            spinner_Work.setSelection(5,true)
+        }
+        if ("${Work}" == "採收")
+        {
+            spinner_Work.setSelection(6,true)
+        }
+        if ("${Work}" == "其他")
+        {
+            spinner_Work.setSelection(7,true)
         }
 
 
@@ -145,7 +171,7 @@ class FarmWork : AppCompatActivity() {
             bundle.putString("date","${editText_Date.text}")
             bundle.putString("code","${spinner_Code.selectedItem}")
             bundle.putString("number","${spinner_Number.selectedItem}")
-            bundle.putString("work","${editText_Work.text}")
+            bundle.putString("work","${spinner_Work.selectedItem}")
             bundle.putString("tips","${editText_Tips.text}")
             val intent = Intent(this,MuckWork::class.java)
             intent.putExtras(bundle)
@@ -161,7 +187,7 @@ class FarmWork : AppCompatActivity() {
             bundle.putString("date","${editText_Date.text}")
             bundle.putString("code","${spinner_Code.selectedItem}")
             bundle.putString("number","${spinner_Number.selectedItem}")
-            bundle.putString("work","${editText_Work.text}")
+            bundle.putString("work","${spinner_Work.selectedItem}")
             bundle.putString("tips","${editText_Tips.text}")
             val intent = Intent(this,WormWork::class.java)
             intent.putExtras(bundle)
@@ -169,7 +195,7 @@ class FarmWork : AppCompatActivity() {
         }
 
         button_Farmwork_add.setOnClickListener {                                                             //新增資料
-            if (editText_Date.length()<1 || editText_Work.length()<1){
+            if (editText_Date.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
@@ -213,7 +239,7 @@ class FarmWork : AppCompatActivity() {
                             editText_Date.text.toString(),  //1  日期
                             spinner_Code.selectedItem.toString(),  //2  田區
                             spinner_Number.selectedItem.toString(),  //3 號碼
-                            editText_Work.text.toString(),  //4  工作
+                            spinner_Work.selectedItem.toString(),  //4  工作
                             editText_Tips.text.toString(),  //5  備註
                             mucktypeselect.toString(),  //6  mucktype
                             muckname.toString(),  //7  muckname
@@ -233,7 +259,6 @@ class FarmWork : AppCompatActivity() {
                 }
                 startActivity(Intent(this, FarmworkData::class.java))
                 editText_Date.setText("")
-                editText_Work.setText("")
                 editText_Tips.setText("")
             }
         }
@@ -310,16 +335,6 @@ class FarmWork : AppCompatActivity() {
         {
             spinner_Number.setSelection(2,true)
         }
-        spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
     }
 
     private fun F(){                                //選到F時的函式
@@ -341,16 +356,6 @@ class FarmWork : AppCompatActivity() {
         if ("${Number}" == "1~3")
         {
             spinner_Number.setSelection(3,true)
-        }
-        spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                Toast.makeText(this@FarmWork,number_F[p2],Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
         }
     }
 
@@ -393,16 +398,6 @@ class FarmWork : AppCompatActivity() {
         if ("${Number}" == "1~6")
         {
             spinner_Number.setSelection(8,true)
-        }
-        spinner_Number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                Toast.makeText(this@FarmWork,number_BCDE[p2],Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
         }
     }
 

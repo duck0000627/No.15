@@ -49,7 +49,6 @@ class farm_work_edit : AppCompatActivity() {
         }
         Log.d("dddddddd","${farmid}")
         editText_Date_edit.setText("${date}")
-        editText_Work_edit.setText("${work}")
         editText_Tips_edit.setText("${tips}")
 
         val croparray = arrayListOf("黑豆","黃豆")       //田區代號
@@ -63,24 +62,51 @@ class farm_work_edit : AppCompatActivity() {
         {
             spinner_Crop_edit.setSelection(1,true)
         }
-        spinner_Crop_edit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+        val workarray = arrayListOf("整地","播種","灌溉","除草","防病蟲害","施肥","採收","其他")       //工作下拉框
+        val arrayAdapter_work = ArrayAdapter(this,android.R.layout.simple_spinner_item,workarray)
+        spinner_Work_edit.adapter = arrayAdapter_work
+        if ("${work}" == "整地")
+        {
+            spinner_Work_edit.setSelection(0,true)
+        }
+        if ("${work}" == "播種")
+        {
+            spinner_Work_edit.setSelection(1,true)
+        }
+        if ("${work}" == "灌溉")
+        {
+            spinner_Work_edit.setSelection(2,true)
+        }
+        if ("${work}" == "除草")
+        {
+            spinner_Work_edit.setSelection(3,true)
+        }
+        if ("${work}" == "防病蟲害")
+        {
+            spinner_Work_edit.setSelection(4,true)
+        }
+        if ("${work}" == "施肥")
+        {
+            spinner_Work_edit.setSelection(5,true)
+        }
+        if ("${work}" == "採收")
+        {
+            spinner_Work_edit.setSelection(6,true)
+        }
+        if ("${work}" == "其他")
+        {
+            spinner_Work_edit.setSelection(7,true)
         }
 
-
         button_Farmwork_add_edit.setOnClickListener {
-            if (editText_Date_edit.length()<1 || editText_Work_edit.length()<1){
+            if (editText_Date_edit.length()<1){
                 Toast.makeText(this,"請勿留空",Toast.LENGTH_SHORT).show()
             }else {
                 try {
                     dbrw.execSQL(
                         "UPDATE FarmWorkDB SET crop = '${spinner_Crop_edit.selectedItem}',date = '${editText_Date_edit.text}'," +
-                                "work = '${editText_Work_edit.text}',tips = '${editText_Tips_edit.text}'," +
+                                "work = '${spinner_Work_edit.selectedItem}',tips = '${editText_Tips_edit.text}'," +
                                 "code = '${spinner_Code_edit.selectedItem}'," +
                                 "number = '${spinner_Number_edit.selectedItem}' WHERE rowid LIKE '${farmid}'")
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
@@ -89,7 +115,6 @@ class farm_work_edit : AppCompatActivity() {
                 }
                 startActivity(Intent(this, FarmworkData::class.java))
                 editText_Date_edit.setText("")
-                editText_Work_edit.setText("")
                 editText_Tips_edit.setText("")
             }
         }
